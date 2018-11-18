@@ -3,6 +3,9 @@
     <Row type="flex" justify="end" class="code-row-bg">
         <Col  :xs="{ span:20 ,pull:2}" :sm="{ span: 10, pull: 4 }" :md="{ span: 6, offset: 4 }">
             <div class="login-form">
+              <div>
+                <p class="sign-in">登录</p>
+              </div>
                 <login-form @listenToChileEvent="login"></login-form>
             </div>
         </Col>
@@ -34,13 +37,20 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  /* background-image: url("./../assets/images/fullstack.jpg"); */
+  background-image: url("./../assets/images/login-bg.jpg");
   background-size: cover;
   background-position: center;
 }
+.sign-in {
+  padding-bottom: 8px;
+  margin-top: -50px;
+  text-align: center;
+  font-size: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
 
 .login-form {
-  height: 320px;
+  height: 300px;
   padding-top: 60px;
   margin-top: 80px;
   margin-bottom: 25px;

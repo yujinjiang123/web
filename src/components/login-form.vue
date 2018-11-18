@@ -8,9 +8,7 @@
             <Input size="large"  type="password" v-model="formInline.password" placeholder="密码">
             </Input>
         </FormItem>
-         <FormItem>
-            <a class="class" @click="forgetPassword()" >忘记密码</a>
-         </FormItem>
+            <a class="forget-password" @click="forgetPassword()" >忘记密码</a>
         <FormItem>
             <Button class="submit" type="primary" @click="handleSubmit('formInline')">登录</Button>
         </FormItem>
@@ -61,7 +59,7 @@ export default {
       });
     },
     forgetPassword() {
-      this.$router.push({
+      this.$router.replace({
         name: "findPassword"
       });
     }
@@ -73,11 +71,16 @@ export default {
 form {
   width: 60%;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 .submit {
   width: 100%;
   margin: auto;
   height: 40px;
+}
+.forget-password {
+  float: right;
+  margin-bottom: 10px;
+  margin-top: -18px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <div @click="gotoBlog()" style="background:#eee;padding:1px;margin-bottom:2px" class="font">
+    <div @click="gotoBlog()" style="background:#eee;padding:1px;margin-bottom:2px" >
         <Card :bordered="false">
-            <p slot="title" >{{blog.title}}</p>
+            <p class="title" @clisk="gotoBlog" slot="title" >{{blog.title}}</p>
             <p>{{blog.content}}</p>
             <div class="info">
                 <Avatar :src="blog.image" />
@@ -31,9 +31,12 @@ export default {
 </script>
 
 <style>
-.font {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+.title {
+  width: 100%;
+}
+.title:hover {
+  color: #2db7f5;
+  cursor: pointer;
 }
 .info {
   display: flex;
