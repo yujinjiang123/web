@@ -15,6 +15,12 @@ export default new Router({
       component: () => import('@/views/home')
     },
     {
+      path: "/",
+      redirect: {
+        name: "login"
+      }
+    },
+    {
       path: '/401',
       name: 'error_401',
       meta: {

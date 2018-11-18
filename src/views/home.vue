@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-      <search @search="searchBlog"></search>
+      <top>
+          <search @search="searchBlog" slot="search"></search>
+      </top>
       <div class="lantern">
         <Row type="flex" justify="start" class="code-row-bg">
           <Col  :xs="{ span:24}" :sm="{ span: 8, push: 4 }" :md="{ span: 6, push: 5 }">
@@ -22,12 +24,14 @@
 import Lantern from "@/components/lantern";
 import Blog from "@/components/blog";
 import Search from "@/components/search";
+import Head from "@/components/head";
 
 export default {
   components: {
     lantern: Lantern,
     blog: Blog,
-    search: Search
+    search: Search,
+    top: Head
   },
   data() {
     return {
