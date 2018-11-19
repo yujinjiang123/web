@@ -139,6 +139,9 @@ export default {
 </script>
 
 <style>
+.home {
+  background-color: #f8f8f9;
+}
 .lantern {
   width: 100%;
   height: 100%;

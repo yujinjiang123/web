@@ -1,7 +1,7 @@
 <template>
-    <div @click="gotoBlog()" style="background:#eee;padding:1px;margin-bottom:2px" >
+    <div  style="background:#eee;padding:1px;margin-bottom:2px" >
         <Card :bordered="false">
-            <p class="title" @clisk="gotoBlog" slot="title" >{{blog.title}}</p>
+            <p class="title" @click="gotoBlog()" slot="title" >{{blog.title}}</p>
             <p>{{blog.content}}</p>
             <div class="info">
                 <Avatar :src="blog.image" />

@@ -2,12 +2,7 @@
   <div class="login">
     <Row type="flex" justify="end" class="code-row-bg">
         <Col  :xs="{ span:20 ,pull:2}" :sm="{ span: 10, pull: 4 }" :md="{ span: 6, offset: 4 }">
-            <div class="login-form">
-              <div>
-                <p class="sign-in">登录</p>
-              </div>
                 <login-form @listenToChileEvent="login"></login-form>
-            </div>
         </Col>
     </Row>
   </div>

@@ -1,4 +1,8 @@
 <template>
+ <div class="login-form">
+    <div>
+      <p class="sign-in">登录</p>
+    </div>
     <Form ref="formInline" :model="formInline" :rules="ruleInline" >
         <FormItem prop="username">
             <Input size="large" type="text"  v-model="formInline.username" placeholder="用户名">
@@ -13,6 +17,7 @@
             <Button class="submit" type="primary" @click="handleSubmit('formInline')">登录</Button>
         </FormItem>
     </Form>
+    </div>
 </template>
 <script>
 export default {
@@ -82,5 +87,13 @@ form {
   float: right;
   margin-bottom: 10px;
   margin-top: -18px;
+}
+.login-form {
+  height: 300px;
+  padding-top: 60px;
+  margin-top: 80px;
+  margin-bottom: 25px;
+  background-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 </style>
