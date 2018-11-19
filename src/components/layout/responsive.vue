@@ -1,7 +1,7 @@
 <template>
     <div class="layout">
         <Layout>
-            <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
+            <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed" >
                  <slot name="head"></slot>
                 <div slot="trigger"></div>
             </Sider>

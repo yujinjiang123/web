@@ -1,6 +1,6 @@
 <template>
     <Carousel autoplay class="pictures" loop>
-            <CarouselItem v-for="item in array" :key="item.url">
+            <CarouselItem v-for="item in array" :key="item.id">
                <a :href="item.url"><img class="image" :src="item.image" /></a> 
             </CarouselItem>
     </Carousel>
