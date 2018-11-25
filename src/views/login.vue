@@ -1,7 +1,7 @@
 <template>
   <div class="login">
-    <Row type="flex" justify="end" class="code-row-bg">
-      <Col :xs="{ span:20 ,pull:2}" :sm="{ span: 10, pull: 4 }" :md="{ span: 6, offset: 4 }">
+    <Row type="flex" justify="center" class="code-row-bg">
+      <Col :xs="{ span:20 }" :sm="{ span: 10}" :md="{ span: 8 }" :lg="{ span:6 }" :xl="{ span:6 }" >
         <login-form @listenToChileEvent="login"></login-form>
       </Col>
     </Row>
@@ -36,14 +36,6 @@
     background-image: url("./../assets/images/login-bg.jpg");
     background-size: cover;
     background-position: center;
-  }
-
-  .sign-in {
-    padding-bottom: 8px;
-    margin-top: -50px;
-    text-align: center;
-    font-size: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 
   .login-form {
