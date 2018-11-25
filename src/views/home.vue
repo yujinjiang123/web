@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <!-- <div class="home">
     <top>
       <search @search="searchBlog" slot="search"></search>
       <dropdown slot="user">
@@ -20,7 +20,13 @@
         </Col>
       </Row>
     </div>
-  </div>
+  </div> -->
+  <top>
+      <search @search="searchBlog" slot="search"></search>
+      <dropdown slot="user">
+        <useravatar slot="dropdown"></useravatar>
+      </dropdown>
+  </top>
 </template>
 
 <script>
