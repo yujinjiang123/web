@@ -43,6 +43,14 @@ export default new Router({
         hideInMenu: true
       },
       component: () => import('@/views/error-page/404')
+    },
+    {
+      path: '/test',
+      name: 'error_404',
+      meta: {
+        hideInMenu: true
+      },
+      component: () => import('@/components/affix')
     }
   ]
 })

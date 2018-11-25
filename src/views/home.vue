@@ -21,27 +21,6 @@
       </Row>
     </div>
   </div>
-  <!-- <div class="home">
-    <responsive>
-      <top slot="head">
-        <search @search="searchBlog" slot="search"></search>
-      </top>
-    </responsive>
-     <div class="lantern" slot="content">
-        <Row type="flex" justify="start" class="code-row-bg">
-          <Col  :xs="{ span:24}" :sm="{ span: 8, push: 4 }" :md="{ span: 6, push: 5 }">
-            <lantern :array='images'></lantern>
-          </Col>
-        </Row>
-      </div>
-      <div class="blogs"  v-for="blog in blogs">
-        <Row type="flex" justify="start" class="code-row-bg">
-          <Col  :xs="{ span:22,push:1 }" :sm="{ span: 12, push: 4 }" :md="{ span: 12, push: 5 }">
-            <blog :blog=blog></blog>
-          </Col>
-        </Row>
-      </div>
-  </div> -->
 </template>
 
 <script>
