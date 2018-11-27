@@ -14,7 +14,12 @@ Vue.use(Vuex);
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false
 
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import  VueQuillEditor from 'vue-quill-editor'
 
+Vue.use(VueQuillEditor);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

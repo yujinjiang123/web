@@ -16,6 +16,14 @@ export default new Router({
       component: () => import('@/views/home')
     },
     {
+      path: '/editor/markdown',
+      name: 'markdown',
+      meta: {
+        hideInMenu: true
+      },
+      component: () => import('@/views/markdown/markdown')
+    },
+    {
       path: "/",
       redirect: {
         name: "login"
@@ -44,14 +52,6 @@ export default new Router({
         hideInMenu: true
       },
       component: () => import('@/views/error-page/404')
-    },
-    {
-      path: '/test',
-      name: 'error_404',
-      meta: {
-        hideInMenu: true
-      },
-      component: () => import('@/views/markdown/markdown')
     }
   ]
 })
