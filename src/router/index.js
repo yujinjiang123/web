@@ -15,6 +15,11 @@ export default new Router({
       component: () => import('@/views/home')
     },
     {
+      path: '/room',
+      name: 'room',
+      component: () => import('@/views/roomdisplay')
+    },
+    {
       path: "/",
       redirect: {
         name: "login"
@@ -51,6 +56,7 @@ export default new Router({
         hideInMenu: true
       },
       component: () => import('@/components/affix')
-    }
+    },
+    
   ]
 })

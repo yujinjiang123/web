@@ -18,6 +18,9 @@
     <MenuItem name="search" style="border-bottom: 0;float:right;right:10%;">
       <slot name="search"></slot>
     </MenuItem>
+    <MenuItem name="user" style="right:5%;float:right;border-bottom: 0px">
+      <slot></slot>
+    </MenuItem>
   </Menu>
 </template>
 <script>

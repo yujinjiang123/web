@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Input search v-model="value" @on-search="search(value)" placeholder="搜索资源"/>
+    <Input search v-model="value" @on-search="search(value)" :placeholder="placeholder"/>
   </div>
 </template>
 <script>
@@ -10,6 +10,7 @@
         value: ""
       };
     },
+    props: ['placeholder'],
     methods: {
       search(value) {
         this.$emit("search", value);

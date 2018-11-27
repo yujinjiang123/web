@@ -39,7 +39,7 @@ import UserAvatar from "@/components/userAvatar";
 
 export default {
   components: {
-    responsive: ResponsiveLayou,
+    // responsive: ResponsiveLayou,
     lantern: Lantern,
     blog: Blog,
     search: Search,
