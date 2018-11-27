@@ -30,7 +30,7 @@ import Search from "@/components/search";
 import Head from "@/components/head";
 import Dropdown from "@/components/dropdown";
 import UserAvatar from "@/components/userAvatar";
-
+import {getBlogs} from "./../api/api";
 export default {
   components: {
     lantern: Lantern,
@@ -42,6 +42,8 @@ export default {
   },
   data() {
     return {
+      page:1,
+      pageSize:15,
       images: [
         {
           id: 1,
@@ -145,6 +147,23 @@ export default {
       console.log(data);
       //TODO
     }
+  },
+  created:function () {
+    //获取数据信息
+    getBlogs(this.page,this.pageSize)
+      .then(res=>{
+        console.log(res);
+        if(res==null){
+          this.$Message.warning('没有消息了');
+        }else{
+          this.blogs.concat(res);
+          this.page+=1;
+        }
+      })
+      .catch(err=>{
+        this.$Message.error('数据获取失败');
+        console.log(err);
+      })
   }
 };
 </script>
