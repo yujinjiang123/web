@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="home">
+  <div class="home">
     <top>
       <search @search="searchBlog" slot="search"></search>
       <dropdown slot="user">
@@ -20,13 +20,7 @@
         </Col>
       </Row>
     </div>
-  </div> -->
-  <top>
-      <search @search="searchBlog" slot="search"></search>
-      <dropdown slot="user">
-        <useravatar slot="dropdown"></useravatar>
-      </dropdown>
-  </top>
+  </div>
 </template>
 
 <script>
@@ -39,7 +33,6 @@ import UserAvatar from "@/components/userAvatar";
 
 export default {
   components: {
-    responsive: ResponsiveLayou,
     lantern: Lantern,
     blog: Blog,
     search: Search,

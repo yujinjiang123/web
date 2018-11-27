@@ -50,7 +50,7 @@ export default new Router({
       meta: {
         hideInMenu: true
       },
-      component: () => import('@/components/affix')
+      component: () => import('@/components/markdown')
     }
   ]
 })
