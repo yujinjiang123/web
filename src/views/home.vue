@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="home">
+  <div class="home">
     <top>
       <search @search="searchBlog" slot="search"></search>
       <dropdown slot="user">
@@ -20,13 +20,7 @@
         </Col>
       </Row>
     </div>
-  </div> -->
-  <top>
-      <search @search="searchBlog" slot="search"></search>
-      <dropdown slot="user">
-        <useravatar slot="dropdown"></useravatar>
-      </dropdown>
-  </top>
+  </div>
 </template>
 
 <script>
@@ -36,10 +30,13 @@ import Search from "@/components/search";
 import Head from "@/components/head";
 import Dropdown from "@/components/dropdown";
 import UserAvatar from "@/components/userAvatar";
-
+import {getBlogs} from "./../api/api";
 export default {
   components: {
+<<<<<<< HEAD
     // responsive: ResponsiveLayou,
+=======
+>>>>>>> 9aae435d2059ed2bcbb90a47c99a0bc07b22ffef
     lantern: Lantern,
     blog: Blog,
     search: Search,
@@ -49,6 +46,8 @@ export default {
   },
   data() {
     return {
+      page:1,
+      pageSize:15,
       images: [
         {
           id: 1,
@@ -152,6 +151,23 @@ export default {
       console.log(data);
       //TODO
     }
+  },
+  created:function () {
+    //获取数据信息
+    getBlogs(this.page,this.pageSize)
+      .then(res=>{
+        console.log(res);
+        if(res==null){
+          this.$Message.warning('没有消息了');
+        }else{
+          this.blogs.concat(res);
+          this.page+=1;
+        }
+      })
+      .catch(err=>{
+        this.$Message.error('数据获取失败');
+        console.log(err);
+      })
   }
 };
 </script>
