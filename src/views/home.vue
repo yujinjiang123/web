@@ -9,14 +9,14 @@
     <div class="lantern">
       <Row type="flex" justify="start" class="code-row-bg">
         <Col :xs="{ span:24}" :sm="{ span: 8, push: 4 }" :md="{ span: 6, push: 5 }">
-          <lantern :array='images'></lantern>
+          <lantern :array="images"></lantern>
         </Col>
       </Row>
     </div>
     <div class="blogs" v-for="blog in blogs">
       <Row type="flex" justify="start" class="code-row-bg">
         <Col :xs="{ span:22,push:1 }" :sm="{ span: 12, push: 4 }" :md="{ span: 12, push: 5 }">
-          <blog :blog=blog></blog>
+          <blog :blog="blog"></blog>
         </Col>
       </Row>
     </div>
@@ -30,10 +30,9 @@ import Search from "@/components/search";
 import Head from "@/components/head";
 import Dropdown from "@/components/dropdown";
 import UserAvatar from "@/components/userAvatar";
-import {getBlogs} from "./../api/api";
+import { getBlogs } from "./../api/api";
 export default {
   components: {
-    // responsive: ResponsiveLayou,
     lantern: Lantern,
     blog: Blog,
     search: Search,
@@ -43,8 +42,8 @@ export default {
   },
   data() {
     return {
-      page:1,
-      pageSize:15,
+      page: 1,
+      pageSize: 15,
       images: [
         {
           id: 1,
@@ -149,22 +148,22 @@ export default {
       //TODO
     }
   },
-  created:function () {
+  created: function() {
     //获取数据信息
-    getBlogs(this.page,this.pageSize)
-      .then(res=>{
+    getBlogs(this.page, this.pageSize)
+      .then(res => {
         console.log(res);
-        if(res==null){
-          this.$Message.warning('没有消息了');
-        }else{
+        if (res == null) {
+          this.$Message.warning("没有消息了");
+        } else {
           this.blogs.concat(res);
-          this.page+=1;
+          this.page += 1;
         }
       })
-      .catch(err=>{
-        this.$Message.error('数据获取失败');
+      .catch(err => {
+        this.$Message.error("数据获取失败");
         console.log(err);
-      })
+      });
   }
 };
 </script>

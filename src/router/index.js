@@ -6,19 +6,14 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [{
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login')
-  },
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/login')
+    },
     {
       path: '/home',
       name: 'home',
       component: () => import('@/views/home')
-    },
-    {
-      path: '/room',
-      name: 'room',
-      component: () => import('@/views/roomdisplay')
     },
     {
       path: '/editor/markdown',
@@ -27,6 +22,11 @@ export default new Router({
         hideInMenu: true
       },
       component: () => import('@/views/markdown/markdown')
+    },
+    {
+      path: '/room',
+      name: 'room',
+      component: () => import('@/views/roomdisplay')
     },
     {
       path: "/",
