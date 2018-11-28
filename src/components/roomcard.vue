@@ -176,12 +176,12 @@ div.class1 {
   width: 10px;
   height: 10px;
   margin-top: 5px;
-  background-color: green;
+  background-color: #67C23A;
 }
 div.class2 {
   width: 10px;
   height: 10px;
   margin-top: 5px;
-  background-color: red;
+  background-color:#ed4014;
 }
 </style>
