@@ -16,18 +16,17 @@ export default new Router({
       component: () => import('@/views/home')
     },
     {
-<<<<<<< HEAD
       path: '/room',
       name: 'room',
       component: () => import('@/views/roomdisplay')
-=======
+    },
+    {
       path: '/editor/markdown',
       name: 'markdown',
       meta: {
         hideInMenu: true
       },
       component: () => import('@/views/markdown/markdown')
->>>>>>> 9aae435d2059ed2bcbb90a47c99a0bc07b22ffef
     },
     {
       path: "/",
@@ -58,19 +57,6 @@ export default new Router({
         hideInMenu: true
       },
       component: () => import('@/views/error-page/404')
-<<<<<<< HEAD
-    },
-    {
-      path: '/test',
-      name: 'error_404',
-      meta: {
-        hideInMenu: true
-      },
-      component: () => import('@/components/affix')
-    },
-    
-=======
     }
->>>>>>> 9aae435d2059ed2bcbb90a47c99a0bc07b22ffef
   ]
 })

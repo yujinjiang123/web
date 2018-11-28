@@ -33,10 +33,7 @@ import UserAvatar from "@/components/userAvatar";
 import {getBlogs} from "./../api/api";
 export default {
   components: {
-<<<<<<< HEAD
     // responsive: ResponsiveLayou,
-=======
->>>>>>> 9aae435d2059ed2bcbb90a47c99a0bc07b22ffef
     lantern: Lantern,
     blog: Blog,
     search: Search,
