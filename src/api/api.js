@@ -2,7 +2,13 @@ import http from 'axios'
 
 const UPLOAD_IMAGE="http://118.24.83.137:5679";
 
-//发起get请求
+
+/**
+ * 发起get请求
+ * @param url
+ * @param config
+ * @returns {Promise<any>}
+ */
 const get=(url,config)=>{
   return new Promise((resolve,reject) => {
     http.get(url,config)
@@ -14,8 +20,12 @@ const get=(url,config)=>{
       })
   })
 };
-
-//发起post请求
+/**
+ * 发起post请求
+ * @param url
+ * @param config
+ * @returns {Promise<any>}
+ */
 const post=(url,config)=>{
     return new Promise((resolve,reject) => {
       http.post(url,config)
@@ -28,10 +38,12 @@ const post=(url,config)=>{
     })
 };
 
-export const test=(url)=>{
-  return get(url);
-};
-
+/**
+ * 上传图片到服务器，返回该图片的url路径
+ * @param pos
+ * @param $file
+ * @returns {Promise<any>}
+ */
 export const uploadImage=(pos,$file)=>{
   let formdata = new FormData();
   formdata.append('file', $file);
@@ -41,7 +53,7 @@ export const uploadImage=(pos,$file)=>{
       method: 'post',
       data:formdata,
       headers: { 'Content-Type': 'multipart/form-data'},
-      })
+    })
       .then(res=>{
         resolve(res.data);
       })
@@ -49,14 +61,14 @@ export const uploadImage=(pos,$file)=>{
         reject(err);
       })
   })
-
-
-  return post(`${UPLOAD_IMAGE}//upload/image/sample`,{
-    data: formdata,
-    headers: { 'Content-Type': 'multipart/form-data' },
-  })
 };
 
+/**
+ * 获取博客列表
+ * @param page
+ * @param pageSize
+ * @returns {*}
+ */
 export const getBlogs=(page,pageSize)=>{
   let params={
     page:page,
@@ -69,3 +81,4 @@ export const getBlogs=(page,pageSize)=>{
   };
   return request(config);
 };
+
