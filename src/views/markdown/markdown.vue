@@ -12,7 +12,7 @@
 
 <script>
   import markdown from "../../components/markdown";
-  import submit from "./submit";
+
   export default {
     data() {
       return {
@@ -30,32 +30,7 @@
         this.contentHtml = data;
       },
       submit() {
-        this.$Modal.confirm({
-          render: (h) => {
-            return h(submit, {
-              props: {
-              },
-              on: {
-                value1: (value1) => {
-                  this.v1 = value1
-                },
-                value2: (value2) => {
-                  this.v2 = value2
-                }
-              }
-            })
-          },
-          onOk: () => {
-            if (this.v1 == '' || this.v2 == '') {
-              this.$Message.error('信息填写不完整!')
-            }
-            const msg = this.$Message.loading({
-              content: '正在保存..',
-              duration: 0
-            })
-            this.saveLink(msg);
-          }
-        })
+        console.log(this.contentHtml);
       },
       gotoHome() {
         this.$router.push({

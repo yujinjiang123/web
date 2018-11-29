@@ -20,6 +20,7 @@
     },
     methods: {
       changeData(value, render) {
+        console.log(value);
         this.contentHtml = render;
         this.$emit("editor",this.contentHtml);
       },

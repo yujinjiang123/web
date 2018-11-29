@@ -1,7 +1,7 @@
 import http from 'axios'
 
 const UPLOAD_IMAGE="http://118.24.83.137:5679";
-
+const BLOG_URL="http://whq6.cn:8080";
 
 /**
  * 发起get请求
@@ -13,7 +13,11 @@ const get=(url,config)=>{
   return new Promise((resolve,reject) => {
     http.get(url,config)
       .then(res=>{
-        resolve(res.data);
+        if(res.data.code===200){
+          resolve(res.data);
+        }else{
+          reject(res);
+        }
       })
       .catch(err=>{
         reject(err);
@@ -30,13 +34,28 @@ const post=(url,config)=>{
     return new Promise((resolve,reject) => {
       http.post(url,config)
         .then(res=>{
-          resolve(res.data);
+          if(res.data.code===200){
+            resolve(res.data);
+          }else{
+            reject(res);
+          }
         })
         .catch(err=>{
           reject(err);
         })
     })
 };
+
+/**
+ * 登录验证
+ * @param username
+ * @param password
+ * @returns {Promise<any>}
+ */
+const login=(params)=>{
+  return post(`${BLOG_URL}/user/signIn`,params);
+};
+
 
 /**
  * 上传图片到服务器，返回该图片的url路径
@@ -64,21 +83,27 @@ export const uploadImage=(pos,$file)=>{
 };
 
 /**
+ * 发布博客
+ * @param params
+ * @returns {Promise<any>}
+ */
+export const publicBlog=(params)=>{
+  return post('BLOG_URL/article/publish',params);
+};
+
+
+/**
  * 获取博客列表
  * @param page
  * @param pageSize
  * @returns {*}
  */
-export const getBlogs=(page,pageSize)=>{
-  let params={
-    page:page,
-    pageSize:pageSize,
-  };
-  let config={
-    url:"",   //TODO
-    method:'get',
-    data:params,
-  };
-  return request(config);
+export const getBlogs=(pageNum,pageSize)=>{
+  return get(url,{
+    data:{
+      pageNum:pageNum,
+      pageSize:pageSize,
+    }
+  });
 };
 

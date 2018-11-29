@@ -2,6 +2,7 @@
   <div class="home">
     <top>
       <search @search="searchBlog" slot="search"></search>
+      <p class="editor" slot="editor" @click="gotoEditor"> <Icon size="18" class="icon" type="ios-create-outline" />写博客</p>
       <dropdown slot="user">
         <useravatar slot="dropdown"></useravatar>
       </dropdown>
@@ -19,7 +20,7 @@
           <blog :blog="blog"></blog>
         </Col>
       </Row>
-    </div>
+  </div>
   </div>
 </template>
 
@@ -42,7 +43,8 @@ export default {
   },
   data() {
     return {
-      page: 1,
+      totalPageNum:null,
+      pageNum: null,
       pageSize: 15,
       images: [
         {
@@ -146,24 +148,31 @@ export default {
     searchBlog(data) {
       console.log(data);
       //TODO
+    },
+    getBlog(){
+      if(this.totalPageNum==null){
+        return ;
+      }else if(this.pageNum>this.totalPageNum){
+        this.$Message.warning('没有更多内容了');
+      }
+      getBlogs(this.pageNum,this.pageSize)
+        .then(res=>{
+          console.log(res);
+          //TODO
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+    },
+    gotoEditor(){
+      this.$router.push({
+        name:'markdown',
+      })
     }
   },
   created: function() {
-    //获取数据信息
-    getBlogs(this.page, this.pageSize)
-      .then(res => {
-        console.log(res);
-        if (res == null) {
-          this.$Message.warning("没有消息了");
-        } else {
-          this.blogs.concat(res);
-          this.page += 1;
-        }
-      })
-      .catch(err => {
-        this.$Message.error("数据获取失败");
-        console.log(err);
-      });
+    //获取博客信息
+    this.getBlog();
   }
 };
 </script>
@@ -171,6 +180,10 @@ export default {
 <style>
 .home {
   background-color: #f8f8f9;
+}
+
+.editor:hover{
+  color:#ed4014;
 }
 
 .lantern {
@@ -183,5 +196,6 @@ export default {
   width: 100%;
   height: auto;
 }
+
 </style>
 
