@@ -10,19 +10,29 @@
 
 <script>
 import LoginForm from "@/components/login-form";
-
+import {login} from "../api/api";
 export default {
   components: {
     loginForm: LoginForm
   },
   methods: {
+    //登录验证
     login(data) {
       console.log(data);
+      let msg="登录成功";
+      login(data)
+        .then(res=>{
+          console.log(res);
+          this.$router.push({
+            name: "home"
+          });
+        })
+        .catch(err=>{
+          console.log(err);
+          msg="登录失败";
+        });
       //TODO
-      this.$Message.success("登录成功");
-      this.$router.push({
-        name: "home"
-      });
+      this.$Message.success(msg);
     }
   }
 };
