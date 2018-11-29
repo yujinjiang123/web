@@ -2,7 +2,8 @@ import http from 'axios'
 
 const UPLOAD_IMAGE="http://118.24.83.137:5679";
 const BLOG_URL="http://whq6.cn:8080";
-const
+const UPLOAD_FILE = "kingsword.xyz:5679/upload/doc/sample";
+export const ROOM = "kingsword.xyz:8080/classroom/selectFreeClassroom";
 /**
  * 发起get请求
  * @param url
@@ -52,7 +53,7 @@ const post=(url,config)=>{
  * @param password
  * @returns {Promise<any>}
  */
-const login=(params)=>{
+export const login=(params)=>{
   return post(`${BLOG_URL}/user/signIn`,params);
 };
 
@@ -106,4 +107,21 @@ export const getBlogs=(pageNum,pageSize)=>{
     }
   });
 };
+
+export const getRoomList = (weekday, lessonList) => {
+  return get(ROOM,{
+    data:{
+      weekday:weekday,
+      lessonList:lessonList,
+    }
+  })
+};
+
+// export const uploadFile = ($file) => {
+//   return post(UPLOAD_FILE,{
+//     data:{
+
+//     }
+//   })
+// }
 

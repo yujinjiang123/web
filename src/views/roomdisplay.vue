@@ -19,14 +19,14 @@
             @click="drawerVisible = true">
             <Icon type="ios-arrow-back" size="40" style="margin:5px;" />
           </div>
-          <Drawer title="高级搜索" :closable="false" v-model="drawerVisible" width="300">
+          <Drawer title="空闲教室查询" :closable="false" v-model="drawerVisible" width="300">
             <Form ref="searchForm" :model="searchForm" :rules="searchForm">
               <FormItem label="周次 :"><br>
-                <Select v-model="searchForm.week">
+                <Select v-model="searchForm.week" disabled>
                   <Option v-for="item in weekList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
               </FormItem>
-              <FormItem label="星期 :"><br>
+              <FormItem label="只能查看本周教室信息 :"><br>
                 <Select v-model="searchForm.weekday" style="width:200px">
                   <Option v-for="item in weekdayList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
@@ -40,6 +40,8 @@
                   <Checkbox label="5"></Checkbox>
                 </CheckboxGroup>
               </FormItem>
+              <Button type="primary" @click="handleSearch(this.searchForm)">查询</Button>
+              
             </Form>
           </Drawer>
         </Content>
