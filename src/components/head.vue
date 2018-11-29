@@ -17,8 +17,11 @@
     <MenuItem name="editor" style="right:5%;float:right;border-bottom: 0px">
       <slot name="editor"></slot>
     </MenuItem>
-    <MenuItem name="search" style="border-bottom: 0;float:right;right:10%;">
+    <MenuItem name="search" style="border-bottom:0;float:right;right:10%;">
       <slot name="search"></slot>
+    </MenuItem>
+    <MenuItem name="filterRoom" style="margin-right:5%;border-bottom: 0;float:right;">
+      <slot name="filterRoom"></slot>
     </MenuItem>
     <MenuItem name="user" style="right:5%;float:right;border-bottom: 0px">
       <slot></slot>

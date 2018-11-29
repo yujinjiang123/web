@@ -2,11 +2,9 @@
   <div>
 
     <Head>
-      <search placeholder="搜索教室" slot="search"></search>
+      <Button @click="drawerVisible = true" type="primary" solt="filterRoom">高级搜索</Button>
+      <search @search="searchRoom" placeholder="搜索教室" slot="search"></search>
       <template>
-        <Affix :offset-right="50">
-          <Button @click="drawerVisible = true" type="primary">高级搜索</Button>
-        </Affix>
         <Drawer title="高级搜索" :closable="false" v-model="drawerVisible" width="300">
           <Form ref="searchForm" :model="searchForm" :rules="searchForm">
             <FormItem label="教学楼 :">
@@ -58,6 +56,12 @@
           selection: []
         }
       };
+    },
+    methods:{
+      searchRoom(){
+        //TODO
+        console.log("搜索教室");
+      }
     }
   };
 

@@ -10,7 +10,7 @@
 
 <script>
 import LoginForm from "@/components/login-form";
-import {login} from "../api/api";
+import { login } from "../api/api";
 export default {
   components: {
     loginForm: LoginForm
@@ -19,20 +19,23 @@ export default {
     //登录验证
     Login(data) {
       console.log(data);
-      let msg="登录成功";
-      login(data)
-        .then(res=>{
-          console.log(res);
-          this.$router.push({
-            name: "home"
-          });
-        })
-        .catch(err=>{
-          console.log(err);
-          msg="登录失败";
-        });
+      let msg = "登录成功";
       //TODO
+      // login(data)
+      //   .then(res=>{
+      //     console.log(res);
+      //     this.$router.push({
+      //       name: "home"
+      //     });
+      //   })
+      //   .catch(err=>{
+      //     console.log(err);
+      //     msg="登录失败";
+      //   });
       this.$Message.success(msg);
+      this.$router.replace({
+        name: "home"
+      });
     }
   }
 };
