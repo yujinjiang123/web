@@ -101,54 +101,6 @@
               }
             ]
           },
-          {
-            id: 301,
-            lessonList: [{
-                name: "第一大节 08:00-09:40",
-                empty: true
-              },
-              {
-                name: "第二大节 10:00-11:40",
-                empty: false
-              },
-              {
-                name: "第三大节 14:30-16:10",
-                empty: true
-              },
-              {
-                name: "第四大节 16:20-18:00",
-                empty: false
-              },
-              {
-                name: "第五大节 19:00-20:30",
-                empty: true
-              }
-            ]
-          },
-          {
-            id: 301,
-            lessonList: [{
-                name: "第一大节 08:00-09:40",
-                empty: true
-              },
-              {
-                name: "第二大节 10:00-11:40",
-                empty: false
-              },
-              {
-                name: "第三大节 14:30-16:10",
-                empty: true
-              },
-              {
-                name: "第四大节 16:20-18:00",
-                empty: false
-              },
-              {
-                name: "第五大节 19:00-20:30",
-                empty: true
-              }
-            ]
-          }
         ]
       };
     },
