@@ -24,11 +24,11 @@
     },
     methods:{
       value1Change:function() {
-        var obj = this;
+        let obj = this;
         this.$emit('value1', obj.value1);
       },
       value2Change:function() {
-        var obj = this
+        let obj = this;
         this.$emit('value2', obj.value2);
       }
     }

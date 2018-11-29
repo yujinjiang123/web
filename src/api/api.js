@@ -31,6 +31,7 @@ const get=(url,config)=>{
  * @returns {Promise<any>}
  */
 const post=(url,config)=>{
+  console.log(url);
     return new Promise((resolve,reject) => {
       http.post(url,config)
         .then(res=>{
@@ -52,18 +53,17 @@ const post=(url,config)=>{
  * @param password
  * @returns {Promise<any>}
  */
-const login=(params)=>{
+export const login=(params)=>{
   return post(`${BLOG_URL}/user/signIn`,params);
 };
 
 
 /**
  * 上传图片到服务器，返回该图片的url路径
- * @param pos
  * @param $file
  * @returns {Promise<any>}
  */
-export const uploadImage=(pos,$file)=>{
+export const uploadImage=($file)=>{
   let formdata = new FormData();
   formdata.append('file', $file);
   return new Promise((resolve,reject) => {
@@ -88,7 +88,9 @@ export const uploadImage=(pos,$file)=>{
  * @returns {Promise<any>}
  */
 export const publicBlog=(params)=>{
-  return post('BLOG_URL/article/publish',params);
+  return post(`${BLOG_URL}/article/publish`,{
+    data:params,
+  });
 };
 
 
