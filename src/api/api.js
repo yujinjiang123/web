@@ -1,7 +1,7 @@
 import http from 'axios'
 
 const UPLOAD_IMAGE="http://118.24.83.137:5679";
-
+const UPLOAD_FILE = "kingsword.xyz:5679/upload/doc/sample";
 
 /**
  * 发起get请求
@@ -70,15 +70,12 @@ export const uploadImage=(pos,$file)=>{
  * @returns {*}
  */
 export const getBlogs=(page,pageSize)=>{
-  let params={
-    page:page,
-    pageSize:pageSize,
-  };
   let config={
-    url:"",   //TODO
-    method:'get',
-    data:params,
+    data:{
+      page: page,
+      pageSize: pageSize,
+    }
   };
-  return request(config);
+  return get("url",config);
 };
 
