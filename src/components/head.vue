@@ -1,16 +1,15 @@
 <template>
   <Menu mode="horizontal" :theme="theme">
     <MenuItem name="1">
-      <Icon type="ios-paper"/>
-      内容管理
+      <div  @click="gotoPage('home')">
+        <Icon type="ios-home" size="20"/>首页
+      </div>
     </MenuItem>
-    <MenuItem name="2">
-      <Icon type="ios-people"/>
-      用户管理
-    </MenuItem>
-    <MenuItem name="4">
-      <Icon type="ios-construct"/>
-      综合设置
+    <MenuItem name="2" >
+      <div @click="gotoPage('room')">
+        <Icon type="ios-people"  size="20"/>
+        查看教室
+      </div>
     </MenuItem>
     <MenuItem name="user" style="right:5%;float:right;border-bottom: 0px">
       <slot name="user"></slot>
@@ -32,6 +31,14 @@
       return {
         theme: "light"
       };
+      },
+    methods:{
+      gotoPage(pageName){
+        console.log(pageName)
+        this.$router.replace({
+          name:pageName
+        })
+      }
     }
   };
 </script>

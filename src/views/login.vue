@@ -2,7 +2,7 @@
   <div class="login">
     <Row type="flex" justify="center" class="code-row-bg">
       <Col :xs="{ span:20 }" :sm="{ span: 10}" :md="{ span: 8 }" :lg="{ span:6 }" :xl="{ span:6 }">
-        <login-form @listenToChileEvent="login"></login-form>
+        <login-form @listenToChileEvent="Login"></login-form>
       </Col>
     </Row>
   </div>
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     //登录验证
-    login(data) {
+    Login(data) {
       console.log(data);
       let msg="登录成功";
       login(data)

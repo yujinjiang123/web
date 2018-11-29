@@ -20,12 +20,11 @@
     },
     methods: {
       changeData(value, render) {
-        console.log(value);
         this.contentHtml = render;
         this.$emit("editor",this.contentHtml);
       },
       $imgAdd(pos, $file){
-        uploadImage(pos,$file)
+        uploadImage($file)
           .then(res => {
             let url="http://"+res.httpUrl;
             console.log(url);
