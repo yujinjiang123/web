@@ -42,7 +42,7 @@
                   <Checkbox label="5"></Checkbox>
                 </CheckboxGroup>
               </FormItem>
-              <Button type="primary" @click="handleSearch(this.searchForm)">查询</Button>
+              <Button type="primary" @click="handleSearch(searchForm)">查询</Button>
             </Form>
           </Drawer>
         </Content>
