@@ -1,7 +1,7 @@
 <template>
   <div style="background:#eee;padding:1px;margin-bottom:2px">
     <Card :bordered="false">
-      <p class="title" @click="gotoBlog()" slot="title">{{blog.title}}</p>
+      <p class="title" @click="gotoBlog(blog.id)" slot="title">{{blog.title}}</p>
       <p>{{blog.content}}</p>
       <div class="info">
         <Avatar :src="blog.image"/>
@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+  import {goBlog} from "./../api/api";
   export default {
     data() {
       return {};
@@ -25,9 +26,17 @@
       blog: {}
     },
     methods: {
-      gotoBlog() {
-        window.location.href = this.blog.url;
-      }
+      gotoBlog(id){
+        console.log(id);
+        //TODO
+        goBlog(id)
+          .then(res=>{
+            console.log(res);
+          })
+          .catch(err=>{
+            console.log(err);
+          })
+      },
     }
   };
 </script>

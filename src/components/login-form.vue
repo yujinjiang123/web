@@ -5,7 +5,7 @@
     </div>
     <Form ref="formInline" :model="formInline" :rules="ruleInline">
       <FormItem prop="username">
-        <Input size="large" type="text" v-model="formInline.username" placeholder="用户名">
+        <Input size="large" type="text" v-model="formInline.username" placeholder="用户名" required>
         </Input>
       </FormItem>
       <FormItem prop="password">
