@@ -110,11 +110,11 @@ export const getBlogs=(pageNum,pageSize)=>{
   });
 };
 
-export const getRoomList = (weekday, lessonList) => {
+export const getRoomList = (serachForm) => {
   return get(ROOM,{
     data:{
-      weekday:weekday,
-      lessonList:lessonList,
+      weekday: serachForm.weekday,
+      lessonList: serachForm.lessonList,
     }
   })
 };
