@@ -1,26 +1,27 @@
 import http from 'axios'
 
-const UPLOAD_IMAGE="http://118.24.83.137:5679";
-const BLOG_URL="http://whq6.cn:8080";
+const UPLOAD_IMAGE = "http://118.24.83.137:5679";
+const BLOG_URL = "http://whq6.cn:8080";
 const UPLOAD_FILE = "kingsword.xyz:5679/upload/doc/sample";
-export const ROOM = "kingsword.xyz:8080/classroom/selectFreeClassroom";
+const ALL_ROOM = "http://118.24.83.137:8081/classroom/searchAll";
+const SEARCH_ROOM="";
 /**
  * 发起get请求
  * @param url
  * @param config
  * @returns {Promise<any>}
  */
-const get=(url,config)=>{
-  return new Promise((resolve,reject) => {
-    http.get(url,config)
-      .then(res=>{
-        if(res.data.code===200){
+const get = (url, config) => {
+  return new Promise((resolve, reject) => {
+    http.get(url, config)
+      .then(res => {
+        if (res.data.code === 200) {
           resolve(res.data);
-        }else{
+        } else {
           reject(res);
         }
       })
-      .catch(err=>{
+      .catch(err => {
         reject(err);
       })
   })
@@ -31,21 +32,21 @@ const get=(url,config)=>{
  * @param config
  * @returns {Promise<any>}
  */
-const post=(url,config)=>{
+const post = (url, config) => {
   console.log(url);
-    return new Promise((resolve,reject) => {
-      http.post(url,config)
-        .then(res=>{
-          if(res.data.code===200){
-            resolve(res.data);
-          }else{
-            reject(res);
-          }
-        })
-        .catch(err=>{
-          reject(err);
-        })
-    })
+  return new Promise((resolve, reject) => {
+    http.post(url, config)
+      .then(res => {
+        if (res.data.code === 200) {
+          resolve(res);
+        } else {
+          reject(res);
+        }
+      })
+      .catch(err => {
+        reject(err);
+      })
+  })
 };
 
 /**
@@ -54,8 +55,8 @@ const post=(url,config)=>{
  * @param password
  * @returns {Promise<any>}
  */
-export const login=(params)=>{
-  return post(`${BLOG_URL}/user/signIn`,params);
+export const login = (params) => {
+  return post(`${BLOG_URL}/user/signIn`, params);
 };
 
 
@@ -64,20 +65,22 @@ export const login=(params)=>{
  * @param $file
  * @returns {Promise<any>}
  */
-export const uploadImage=($file)=>{
+export const uploadImage = ($file) => {
   let formdata = new FormData();
   formdata.append('file', $file);
-  return new Promise((resolve,reject) => {
+  return new Promise((resolve, reject) => {
     http({
-      url: `${UPLOAD_IMAGE}//upload/image/sample`,
-      method: 'post',
-      data:formdata,
-      headers: { 'Content-Type': 'multipart/form-data'},
-    })
-      .then(res=>{
+        url: `${UPLOAD_IMAGE}//upload/image/sample`,
+        method: 'post',
+        data: formdata,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+      })
+      .then(res => {
         resolve(res.data);
       })
-      .catch(err=>{
+      .catch(err => {
         reject(err);
       })
   })
@@ -88,9 +91,9 @@ export const uploadImage=($file)=>{
  * @param params
  * @returns {Promise<any>}
  */
-export const publicBlog=(params)=>{
-  return post(`${BLOG_URL}/article/publish`,{
-    data:params,
+export const publicBlog = (params) => {
+  return post(`${BLOG_URL}/article/publish`, {
+    data: params,
   });
 };
 
@@ -101,22 +104,26 @@ export const publicBlog=(params)=>{
  * @param pageSize
  * @returns {*}
  */
-export const getBlogs=(pageNum,pageSize)=>{
-  return get(url,{
-    data:{
-      pageNum:pageNum,
-      pageSize:pageSize,
+export const getBlogs = (pageNum, pageSize) => {
+  return get(url, {
+    data: {
+      pageNum: pageNum,
+      pageSize: pageSize,
     }
   });
 };
 
 export const getRoomList = (serachForm) => {
-  return get(ROOM,{
-    data:{
+  return get(SEARCH_ROOM, {
+    data: {
       weekday: serachForm.weekday,
       lessonList: serachForm.lessonList,
     }
   })
+};
+
+export const initRoomList=()=>{
+  return get(ALL_ROOM,{})
 };
 
 // export const uploadFile = ($file) => {
@@ -126,4 +133,3 @@ export const getRoomList = (serachForm) => {
 //     }
 //   })
 // }
-

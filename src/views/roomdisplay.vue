@@ -23,18 +23,19 @@
               <FormItem label="周次 :">
                 <br>
                 <Select v-model="searchForm.week" disabled>
-                  <Option v-for="item in weekList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                  <Option v-for="item in weekOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
               </FormItem>
               <FormItem label="只能查看本周教室信息 :">
                 <br>
-                <Select v-model="searchForm.weekday" style="width:200px">
-                  <Option v-for="item in weekdayList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                <Select clearable v-model="searchForm.weekday" style="width:200px">
+                  <Option v-for="item in weekdayOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
               </FormItem>
               <FormItem label="空闲时段(第几节课) :">
                 <br>
-                <CheckboxGroup v-model="searchForm.lessonList">
+                <Checkbox :indeterminate="indeterminate" :value="checkAll" @click.prevent.native="handleCheckAll">全选</Checkbox>
+                <CheckboxGroup v-model="searchForm.lessonList" @on-change="checkAllGroupChange">
                   <Checkbox label="1"></Checkbox>
                   <Checkbox label="2"></Checkbox>
                   <Checkbox label="3"></Checkbox>
@@ -63,6 +64,12 @@
   import {
     log
   } from 'util';
+  import {
+    getRoomList
+  } from "../api/api";
+  import {
+    initRoomList
+  } from "../api/api";
   export default {
     components: {
       RoomCard: RoomCard,
@@ -73,46 +80,99 @@
     },
     data() {
       return {
+        indeterminate: true,
+        checkAll: false,
         drawerVisible: false,
         searchForm: {
           weekday: "",
           lessonList: []
         },
-        weekList: [],
-        weekdayList: [],
-        searchRoomList: [],
+        weekOptions: [],
+        weekdayOptions: [],
+        searchRoomList: [{
+            id: 301,
+            state: [1, 0, 1, 0, 1],
+          }, {
+            id: 301,
+            state: [1, 0, 1, 0, 1],
+          },
+          {
+            id: 301,
+            state: [1, 0, 1, 0, 1],
+          },
+          {
+            id: 301,
+            state: [1, 0, 1, 0, 1],
+          },
+          {
+            id: 301,
+            state: [1, 0, 1, 0, 1],
+          },
+          {
+            id: 301,
+            state: [1, 0, 1, 0, 1],
+          },
+        ]
       };
     },
     methods: {
-      // initialOption() {
-      //   for (var i = 1; i < 21; i++) {
-      //     this.weekList.push({
-      //       value: i,
-      //       lable: "第" + i + "周"
-      //     });
-      //   }
-      // }
+      handleCheckAll() {
+        if (this.indeterminate) {
+          this.checkAll = false;
+        } else {
+          this.checkAll = !this.checkAll;
+        }
+        this.indeterminate = false;
+        if (this.checkAll) {
+          this.searchForm.lessonList = ['1', '2', '3', '4', '5'];
+        } else {
+          this.searchForm.lessonList = [];
+        }
+      },
+      checkAllGroupChange(data) {
+        if (data.length === 5) {
+          this.indeterminate = false;
+          this.checkAll = true;
+        } else if (data.length > 0) {
+          this.indeterminate = true;
+          this.checkAll = false;
+        } else {
+          this.indeterminate = false;
+          this.checkAll = false;
+        }
+      },
       handleSearch(serachForm) {
-        this.$api.getRoomList(serachForm)
-          .then((data) => {
-            this.searchRoomList = data;
+        console.log(this.searchForm);
+        getRoomList(serachForm)
+          .then((res) => {
+            this.searchRoomList = res.data;
+            console.log(this.searchRoomList);
           }, (res) => {
-            console.log('状态码:' + res.code);
+            console.log('状态码:' + res.code + '\n' + '错误信息:' + res.message);
           })
           .catch(err => {
-            console.log("数据获取失败");
+            console.log(err);
           })
       }
     },
     mounted: function () {
+      initRoomList().then((res) => {
+          this.searchRoomList = res.data;
+          console.log(this.searchRoomList);
+        }, (res) => {
+          console.log('状态码:' + res.code + '\n' + '错误信息:' + res.message);
+        })
+        .catch(err => {
+          console.log(err);
+        });
       for (var i = 1; i < 21; i++) {
-        this.weekList.push({
+        this.weekOptions.push({
           value: i,
           label: "第" + i + "周"
         });
-      }
+      };
       for (var i = 1; i <= 7; i++) {
-        this.weekdayList.push({
+        this.weekdayOptions.push({
           value: i,
           label: "星期" + i
         });
