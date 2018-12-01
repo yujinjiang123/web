@@ -1,7 +1,7 @@
 import http from 'axios'
 
 const UPLOAD_IMAGE = "http://118.24.83.137:5679";
-const BLOG_URL = "http://whq6.cn:8081";
+const BLOG_URL = "http://whq6.cn:8080";
 const UPLOAD_FILE = "kingsword.xyz:5679/upload/doc/sample";
 const ALL_ROOM = "http://118.24.83.137:8081/classroom/searchAll";
 const SEARCH_ROOM = "";
@@ -136,4 +136,8 @@ export const getRoomList = (weekday, lessonList) => {
       lessonList: lessonList,
     }
   })
+};
+
+export const initRoomList = () => {
+  return get(ALL_ROOM, {})
 };

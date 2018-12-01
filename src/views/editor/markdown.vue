@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import markdown from "../../components/markdown";
+  import markdown from "../../components/editor/markdown";
   import {publicBlog} from "../../api/api";
 
   export default {
@@ -51,6 +51,7 @@
         this.contentHtml = data;
       },
       submit() {
+        console.log(this.contentHtml);
         this.dialogVisible = false;
         let params = {
           username: "于锦江",

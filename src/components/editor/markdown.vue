@@ -6,7 +6,7 @@
 <script>
   let MavonEditor = require("mavon-editor");
   import "mavon-editor/dist/css/index.css";
-  import {uploadImage} from "../api/api";
+  import {uploadImage} from "../../api/api";
   export default {
     name: "editor",
     data() {

@@ -42,6 +42,11 @@ export default new Router({
       component: () => import('@/views/roomdisplay')
     },
     {
+      path:"/test",
+      name:"test",
+      component:()=>import("@/components/editor/article")
+    },
+    {
       path: '/401',
       name: 'error_401',
       meta: {
@@ -64,6 +69,6 @@ export default new Router({
         hideInMenu: true
       },
       component: () => import('@/views/error-page/404')
-    }
+    },
   ]
 })
