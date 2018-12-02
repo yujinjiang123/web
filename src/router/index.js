@@ -5,7 +5,12 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  routes: [{
+  routes: [
+    {
+      path: '/',
+      name: 'login',
+      component: () => import('@/views/login')
+    },{
       path: '/login',
       name: 'login',
       component: () => import('@/views/login')
@@ -16,17 +21,30 @@ export default new Router({
       component: () => import('@/views/home')
     },
     {
+      path: '/tranformPassword',
+      name: 'rePassword',
+      meta: {
+        hideInMenu: true
+      },
+      component: () => import('@/views/tranformPassword')
+    },
+    {
       path: '/editor/markdown',
       name: 'markdown',
       meta: {
         hideInMenu: true
       },
-      component: () => import('@/views/markdown/markdown')
+      component: () => import('@/views/editor/markdown')
     },
     {
       path: '/room',
       name: 'room',
       component: () => import('@/views/roomdisplay')
+    },
+    {
+      path:"/test",
+      name:"test",
+      component:()=>import("@/components/editor/article")
     },
     {
       path: '/401',
@@ -51,6 +69,6 @@ export default new Router({
         hideInMenu: true
       },
       component: () => import('@/views/error-page/404')
-    }
+    },
   ]
 })

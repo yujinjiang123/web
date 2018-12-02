@@ -6,7 +6,7 @@
 <script>
   let MavonEditor = require("mavon-editor");
   import "mavon-editor/dist/css/index.css";
-  import {uploadImage} from "../api/api";
+  import {uploadImage} from "../../api/api";
   export default {
     name: "editor",
     data() {
@@ -26,7 +26,7 @@
       $imgAdd(pos, $file){
         uploadImage($file)
           .then(res => {
-            let url="http://"+res.httpUrl;
+            let url=res.httpUrl;
             console.log(url);
             // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
             // 通过引入对象获取: import {mavonEditor} from ... 等方式引入后，此时$vm即为mavonEditor

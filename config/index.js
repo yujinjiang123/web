@@ -11,6 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+      // '/api':{
+      //   target:'http://whq6.cn:8080',
+      //   changeOrigin:true,
+      //   pathRewrite:{
+      //     '^/api':'/'
+      //   }
+      // }
     },
 
     // Various Dev Server settings

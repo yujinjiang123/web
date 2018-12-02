@@ -4,10 +4,10 @@
       <slot name="dropdown"></slot>
     </a>
     <DropdownMenu slot="list">
-      <DropdownItem>我的消息</DropdownItem>
-      <DropdownItem>个人中心·</DropdownItem>
-      <DropdownItem>我的博客</DropdownItem>
-      <DropdownItem>修改密码</DropdownItem>
+      <DropdownItem><span>我的消息</span></DropdownItem>
+      <DropdownItem><span>个人中心</span></DropdownItem>
+      <DropdownItem><span>我的博客</span></DropdownItem>
+      <DropdownItem ><span @click="rePassword">修改密码</span></DropdownItem>
       <DropdownItem><span @click="exit">退出登录</span></DropdownItem>
     </DropdownMenu>
   </Dropdown>
@@ -19,6 +19,12 @@
         //TODO
         this.$router.replace({
           name: "login"
+        })
+      },
+      rePassword(){
+        //TODO
+        this.$router.push({
+          name:"rePassword"
         })
       }
     }

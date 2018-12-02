@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import markdown from "../../components/markdown";
+  import markdown from "../../components/editor/markdown";
   import {publicBlog} from "../../api/api";
 
   export default {
@@ -44,25 +44,29 @@
           .then(_ => {
             done();
           })
-          .catch(_ => {});
+          .catch(_ => {
+          });
       },
       editor(data) {
         this.contentHtml = data;
       },
       submit() {
-        this.dialogVisible=false;
-        let config = {
-          data: {
-            id: "1",
-            username: "于锦江",
-            stuId: "123456",
-            title: this.title,
-            content: this.contentHtml
-          }
+        console.log(this.contentHtml);
+        this.dialogVisible = false;
+        let params = {
+          username: "于锦江",
+          stuId: "123456",
+          title: this.title,
+          content: this.contentHtml
         };
-        publicBlog(config)
+        publicBlog(params)
           .then(res => {
             console.log(res);
+            if(res.success){
+              this.$Message.success('发布成功');
+            }else{
+              this.$Message.error('发送失败');
+            }
           })
           .catch(err => {
             console.log(err);

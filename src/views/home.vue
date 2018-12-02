@@ -17,7 +17,7 @@
     <div class="blogs" v-for="blog in blogs">
       <Row type="flex" justify="start" class="code-row-bg">
         <Col :xs="{ span:22,push:1 }" :sm="{ span: 12, push: 4 }" :md="{ span: 12, push: 5 }">
-          <blog :blog="blog"></blog>
+          <blog :blog="blog" @click="gotoBlog(blog.id)"></blog>
         </Col>
       </Row>
   </div>
@@ -31,7 +31,8 @@ import Search from "@/components/search";
 import Head from "@/components/head";
 import Dropdown from "@/components/dropdown";
 import UserAvatar from "@/components/userAvatar";
-import { getBlogs } from "./../api/api";
+import { getAlllogs } from "./../api/api";
+
 export default {
   components: {
     lantern: Lantern,
@@ -70,6 +71,7 @@ export default {
       ],
       blogs: [
         {
+          id:1,
           title: "学习VUE",
           content: "我爱学习，学习爱我",
           image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
@@ -79,6 +81,7 @@ export default {
           collection: 456
         },
         {
+          id:2,
           title: "学习VUE",
           content: "我爱学习，学习爱我",
           image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
@@ -88,6 +91,7 @@ export default {
           collection: 456
         },
         {
+          id:3,
           title: "学习VUE",
           content: "我爱学习，学习爱我",
           image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
@@ -97,6 +101,7 @@ export default {
           collection: 456
         },
         {
+          id:4,
           title: "学习VUE",
           content: "我爱学习，学习爱我",
           image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
@@ -106,6 +111,7 @@ export default {
           collection: 456
         },
         {
+          id:5,
           title: "学习VUE",
           content: "我爱学习，学习爱我",
           image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
@@ -115,6 +121,7 @@ export default {
           collection: 456
         },
         {
+          id:6,
           title: "学习VUE",
           content: "我爱学习，学习爱我",
           image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
@@ -124,6 +131,7 @@ export default {
           collection: 456
         },
         {
+          id:7,
           title: "学习VUE",
           content: "我爱学习，学习爱我",
           image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
@@ -133,6 +141,7 @@ export default {
           collection: 456
         },
         {
+          id:8,
           title: "学习VUE",
           content: "我爱学习，学习爱我",
           image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
@@ -155,7 +164,7 @@ export default {
       }else if(this.pageNum>this.totalPageNum){
         this.$Message.warning('没有更多内容了');
       }
-      getBlogs(this.pageNum,this.pageSize)
+      getAllBlogs(this.pageNum,this.pageSize)
         .then(res=>{
           console.log(res);
           //TODO

@@ -4,7 +4,7 @@ const UPLOAD_IMAGE = "http://118.24.83.137:5679";
 const BLOG_URL = "http://whq6.cn:8080";
 const UPLOAD_FILE = "kingsword.xyz:5679/upload/doc/sample";
 const ALL_ROOM = "http://118.24.83.137:8081/classroom/searchAll";
-const SEARCH_ROOM="";
+const SEARCH_ROOM = "";
 /**
  * 发起get请求
  * @param url
@@ -15,7 +15,7 @@ const get = (url, config) => {
   return new Promise((resolve, reject) => {
     http.get(url, config)
       .then(res => {
-        if (res.data.code === 200) {
+        if (res.status === 200) {
           resolve(res.data);
         } else {
           reject(res);
@@ -33,12 +33,11 @@ const get = (url, config) => {
  * @returns {Promise<any>}
  */
 const post = (url, config) => {
-  console.log(url);
   return new Promise((resolve, reject) => {
     http.post(url, config)
       .then(res => {
-        if (res.data.code === 200) {
-          resolve(res);
+        if (res.status === 200) {
+          resolve(res.data);
         } else {
           reject(res);
         }
@@ -49,15 +48,12 @@ const post = (url, config) => {
   })
 };
 
-/**
- * 登录验证
- * @param username
- * @param password
- * @returns {Promise<any>}
- */
-export const login = (params) => {
-  return post(`${BLOG_URL}/user/signIn`, params);
-};
+
+// http.interceptors.request.use(config => {
+//   console.log(JSON.parse(JSON.stringify(config)));
+// });
+
+
 
 
 /**
@@ -92,9 +88,7 @@ export const uploadImage = ($file) => {
  * @returns {Promise<any>}
  */
 export const publicBlog = (params) => {
-  return post(`${BLOG_URL}/article/publish`, {
-    data: params,
-  });
+  return post(`${BLOG_URL}/article/publish`, params);
 };
 
 
@@ -104,32 +98,46 @@ export const publicBlog = (params) => {
  * @param pageSize
  * @returns {*}
  */
-export const getBlogs = (pageNum, pageSize) => {
-  return get(url, {
-    data: {
-      pageNum: pageNum,
-      pageSize: pageSize,
-    }
+export const getOwnBlogs = (id, pageNum, pageSize) => {
+  return get('', {
+    id: id,
+    pageNum: pageNum,
+    pageSize: pageSize
   });
 };
 
-export const getRoomList = (serachForm) => {
-  return get(SEARCH_ROOM, {
+/**
+ * 获取自己写的博客
+ * @param pageNum
+ * @param pageSize
+ * @returns {Promise<any>}
+ */
+export const getAllBlogs = (pageNum, pageSize) => {
+  return get('', {
+    pageNum: pageNum,
+    pageSize: pageSize
+  });
+};
+
+/**
+ * 通过id获取博客信息
+ * @param id
+ * @returns {Promise<any>}
+ */
+export const goBlog = (id) => {
+  return get(`${BLOG_URL}/article/get?id=${id}`, {})
+};
+
+
+export const getRoomList = (weekday, lessonList) => {
+  return get(ROOM, {
     data: {
-      weekday: serachForm.weekday,
-      lessonList: serachForm.lessonList,
+      weekday: weekday,
+      lessonList: lessonList,
     }
   })
 };
 
-export const initRoomList=()=>{
-  return get(ALL_ROOM,{})
+export const initRoomList = () => {
+  return get(ALL_ROOM, {})
 };
-
-// export const uploadFile = ($file) => {
-//   return post(UPLOAD_FILE,{
-//     data:{
-
-//     }
-//   })
-// }
