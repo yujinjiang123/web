@@ -36,6 +36,8 @@ export default {
       this.$router.replace({
         name: "home"
       });
+    },
+    register(){
     }
   }
 };

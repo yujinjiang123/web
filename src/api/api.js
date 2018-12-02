@@ -141,3 +141,11 @@ export const getRoomList = (weekday, lessonList) => {
 export const initRoomList = () => {
   return get(ALL_ROOM, {})
 };
+
+get("http://localhost:8080/test")
+  .then(res=>{
+    console.log(res);
+  })
+  .catch(err=>{
+    console.log(err);
+  });
