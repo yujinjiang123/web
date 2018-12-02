@@ -153,18 +153,8 @@
           .catch(err => {
             console.log(err);
           })
-      }
-    },
-    mounted: function () {
-      initRoomList().then((res) => {
-          this.searchRoomList = res.data;
-          console.log(this.searchRoomList);
-        }, (res) => {
-          console.log('状态码:' + res.code + '\n' + '错误信息:' + res.message);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      },
+      initOptions() {
       for (var i = 1; i < 21; i++) {
         this.weekOptions.push({
           value: i,
@@ -177,6 +167,19 @@
           label: "星期" + i
         });
       }
+    },
+    },
+    mounted: function () {
+      initRoomList().then((res) => {
+          this.searchRoomList = res.data;
+          console.log(this.searchRoomList);
+        }, (res) => {
+          console.log('状态码:' + res.code + '\n' + '错误信息:' + res.message);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+        this.initOptions();
     }
   };
 
