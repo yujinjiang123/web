@@ -37,11 +37,6 @@ export default new Router({
       component: () => import('@/views/editor/markdown')
     },
     {
-      path: '/room',
-      name: 'room',
-      component: () => import('@/views/roomdisplay')
-    },
-    {
       path:"/test",
       name:"test",
       component:()=>import("@/components/editor/article")

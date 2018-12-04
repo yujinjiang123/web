@@ -4,41 +4,35 @@
       <a class="head-item" @click="gotoLogin" style="color: #303133;">登录</a>
       <a class="head-item" @click="gotoRegister" style="color: #303133;">注册</a>
     </div>
-    <Form
-      v-if="view=='login'"
-      class="form"
-      ref="formInline"
-      :model="formInline"
-      :rules="ruleInline"
-    >
+    <Form v-if="view=='login'" class="form" ref="formInline" :model="formInline" :rules="ruleInline">
       <FormItem prop="username">
-        <Input size="large" type="text" v-model="formInline.username" placeholder="用户名" required>
+        <Input size="large" type="text" v-model="formInline.username" placeholder="用户名" required></Input>
       </FormItem>
       <FormItem prop="password">
-        <Input size="large" type="password" v-model="formInline.password" placeholder="密码">
+        <Input size="large" type="password" v-model="formInline.password" placeholder="密码"></Input>
       </FormItem>
       <a class="forget-password" @click="forgetPassword()">忘记密码</a>
-      <br>
       <FormItem>
         <Button class="submit" type="primary" @click="handleSubmit('formInline')">登录</Button>
       </FormItem>
     </Form>
+
     <Form v-if="view=='register'" class="form" ref="register" :model="register" :rules="ruleInline">
       <FormItem prop="registerUsername">
-        <Input size="large" type="text" v-model="register.username" placeholder="用户名" required>
+        <Input size="large" type="text" v-model="register.username" placeholder="用户名"></Input>
       </FormItem>
       <FormItem prop="password1">
-        <Input size="large" type="password" v-model="register.password1" placeholder="请输入密码">
+        <Input size="large" type="password" v-model="register.password1" placeholder="请输入密码"></Input>
       </FormItem>
       <FormItem prop="password2">
-        <Input size="large" type="password" v-model="register.password2" placeholder="确认密码">
+        <Input size="large" type="password" v-model="register.password2" placeholder="确认密码"></Input>
       </FormItem>
       <FormItem prop="email">
-        <Input size="large" type="email" v-model="register.email" placeholder="邮箱地址">
+        <Input size="large" type="email" v-model="register.email" placeholder="邮箱地址"></Input>
       </FormItem>
       <FormItem prop="code">
         <div style="display: flex">
-          <Input type="text" v-model="register.code" style="width:50%;" placeholder="请输入验证码">
+          <Input type="text" v-model="register.code" style="width:50%;" placeholder="请输入验证码"></Input>
           <Button
             @click="sendEmail"
             class="send-code"
@@ -54,9 +48,36 @@
   </div>
 </template>
 <script>
-// import md5 from "../utils/md5.js";
-export default {
+
+  import {sendEmail} from "../api/api";
+
+  export default {
   data() {
+    const validateResisterUsername=(rule, value, callback) => {
+      if (value === "") {
+        return callback(new Error('请输入用户名'));
+      }else {
+        callback();
+      }
+    };
+    const validatePassword =(rule, value, callback) => {
+      if (value === "") {
+        return callback(new Error('请输入密码'));
+      } else if ((this.register.password1 != this.register.password2)&&this.register.password2!="") {
+        callback('两次密码不一致');
+      } else {
+        callback();
+      }
+    };
+    const validateEmail =(rule, value, callback) => {
+      if (value === "") {
+        return callback(new Error('请输入邮箱'));
+      } else if (!(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(value))) {
+        callback('请输入正确的邮箱地址');
+      } else {
+        callback();
+      }
+    };
     return {
       totalTime: 60,
       canClick: false, //添加canClick
@@ -98,14 +119,14 @@ export default {
         registerUsername: [
           {
             required: true,
-            message: "请输入用户名",
+            validator:validateResisterUsername,
             trigger: "blur"
           }
         ],
         password1: [
           {
             required: true,
-            message: "请输入密码",
+            validator:validatePassword,
             trigger: "blur"
           },
           {
@@ -118,7 +139,7 @@ export default {
         password2: [
           {
             required: true,
-            message: "请输入密码",
+            validator:validatePassword,
             trigger: "blur"
           },
           {
@@ -131,7 +152,7 @@ export default {
         email: [
           {
             required: true,
-            message: "请输入邮箱",
+            validator:validateEmail,
             trigger: "blur"
           }
         ],
@@ -143,7 +164,7 @@ export default {
           }
         ]
       }
-    };
+    }
   },
   methods: {
     gotoLogin() {
@@ -178,8 +199,17 @@ export default {
     sendEmail() {
       if (this.register.email === "") {
         this.$Message.warning("请填写邮箱");
-      } else {
+      }else if(!(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(this.register.email))){
+        this.$Message.warning("请输入正确的邮箱地址");
+      } else{
         this.countDown();
+        sendEmail(this.register.email)
+          .then(res=>{
+            console.log(res.data);
+          })
+          .catch(err=>{
+            console.log(err);
+          })
       }
     },
     countDown() {
