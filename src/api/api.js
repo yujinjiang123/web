@@ -1,4 +1,5 @@
-import http from 'axios'
+import http from 'axios';
+import qs from 'qs';
 
 const UPLOAD_IMAGE = "http://118.24.83.137:5679";
 const BLOG_URL = "http://whq6.cn:8080";
@@ -142,10 +143,10 @@ export const initRoomList = () => {
   return get(ALL_ROOM, {})
 };
 
-get("http://localhost:8080/test")
-  .then(res=>{
-    console.log(res);
+export const sendEmail=(email)=>{
+  return post("http://localhost:8080/post",{
+    data:{
+      param:email
+    }
   })
-  .catch(err=>{
-    console.log(err);
-  });
+};

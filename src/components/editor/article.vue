@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="blog">
     <span class="markdown-body" v-html="essay"></span>
   </div>
 </template>
@@ -39,5 +39,8 @@
 </script>
 <style>
   @import "../../../node_modules/mavon-editor/dist/css/index.css";
-  @import "../../assets/css/markdown.css";
+  .blog{
+    width:100%;
+    height:100%;
+  }
 </style>

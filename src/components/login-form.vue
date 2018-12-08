@@ -4,7 +4,13 @@
       <a class="head-item" @click="gotoLogin" style="color: #303133;">登录</a>
       <a class="head-item" @click="gotoRegister" style="color: #303133;">注册</a>
     </div>
-    <Form v-if="view=='login'" class="form" ref="formInline" :model="formInline" :rules="ruleInline">
+    <Form
+      v-if="view=='login'"
+      class="form"
+      ref="formInline"
+      :model="formInline"
+      :rules="ruleInline"
+    >
       <FormItem prop="username">
         <Input size="large" type="text" v-model="formInline.username" placeholder="用户名" required></Input>
       </FormItem>
@@ -12,14 +18,13 @@
         <Input size="large" type="password" v-model="formInline.password" placeholder="密码"></Input>
       </FormItem>
       <a class="forget-password" @click="forgetPassword()">忘记密码</a>
-      <br>
       <FormItem>
         <Button class="submit" type="primary" @click="handleSubmit('formInline')">登录</Button>
       </FormItem>
     </Form>
     <Form v-if="view=='register'" class="form" ref="register" :model="register" :rules="ruleInline">
       <FormItem prop="registerUsername">
-        <Input size="large" type="text" v-model="register.username" placeholder="用户名" required></Input>
+        <Input size="large" type="text" v-model="register.username" placeholder="用户名"></Input>
       </FormItem>
       <FormItem prop="password1">
         <Input size="large" type="password" v-model="register.password1" placeholder="请输入密码"></Input>
@@ -33,7 +38,13 @@
       <FormItem prop="code">
         <div style="display: flex">
           <Input type="text" v-model="register.code" style="width:50%;" placeholder="请输入验证码"></Input>
-          <Button @click="sendEmail" class="send-code" style="width:50%;" :disabled="canClick">{{codeInfo}}</Button>
+          <Button
+            @click="sendEmail"
+            class="send-code"
+            style="width:50%;"
+            :disabled="canClick"
+          >{{codeInfo}}
+          </Button>
         </div>
       </FormItem>
       <FormItem>
@@ -43,9 +54,42 @@
   </div>
 </template>
 <script>
-  // import md5 from "../utils/md5.js";
+  import {sendEmail} from "../api/api";
+
   export default {
     data() {
+      const validateResisterUsername = (rule, value, callback) => {
+        if (value === "") {
+          return callback(new Error("请输入用户名"));
+        } else {
+          callback();
+        }
+      };
+      const validatePassword = (rule, value, callback) => {
+        if (value === "") {
+          return callback(new Error("请输入密码"));
+        } else if (
+          this.register.password1 != this.register.password2 &&
+          this.register.password2 != ""
+        ) {
+          callback("两次密码不一致");
+        } else {
+          callback();
+        }
+      };
+      const validateEmail = (rule, value, callback) => {
+        if (value === "") {
+          return callback(new Error("请输入邮箱"));
+        } else if (
+          !/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(
+            value
+          )
+        ) {
+          callback("请输入正确的邮箱地址");
+        } else {
+          callback();
+        }
+      };
       return {
         totalTime: 60,
         canClick: false, //添加canClick
@@ -64,12 +108,15 @@
           code: ""
         },
         ruleInline: {
-          username: [{
-            required: true,
-            message: "请输入用户名",
-            trigger: "blur"
-          }],
-          password: [{
+          username: [
+            {
+              required: true,
+              message: "请输入用户名",
+              trigger: "blur"
+            }
+          ],
+          password: [
+            {
               required: true,
               message: "请输入密码",
               trigger: "blur"
@@ -81,45 +128,41 @@
               trigger: "blur"
             }
           ],
-          registerUsername: [{
-            required: true,
-            message: "请输入用户名",
-            trigger: "blur"
-          }],
-          password1: [{
-              required: true,
-              message: "请输入密码",
-              trigger: "blur"
-            },
+          registerUsername: [
             {
-              type: "string",
-              min: 6,
-              message: "密码不能少于六位",
+              required: true,
+              validator: validateResisterUsername,
               trigger: "blur"
             }
           ],
-          password2: [{
-              required: true,
-              message: "请输入密码",
-              trigger: "blur"
-            },
+          password1: [
             {
-              type: "string",
-              min: 6,
-              message: "密码不能少于六位",
+              required: true,
+              validator: validatePassword,
               trigger: "blur"
             }
           ],
-          email: [{
-            required: true,
-            message: "请输入邮箱",
-            trigger: "blur"
-          }],
-          code: [{
-            required: true,
-            message: "请输入验证码",
-            trigger: "blur"
-          }]
+          password2: [
+            {
+              required: true,
+              validator: validatePassword,
+              trigger: "blur"
+            }
+          ],
+          email: [
+            {
+              required: true,
+              validator: validateEmail,
+              trigger: "blur"
+            }
+          ],
+          code: [
+            {
+              required: true,
+              message: "请输入验证码",
+              trigger: "blur"
+            }
+          ]
         }
       };
     },
@@ -148,16 +191,24 @@
           }
         });
       },
-      forgetPassword() {
-        this.$router.replace({
-          name: "findPassword"
-        });
-      },
       sendEmail() {
         if (this.register.email === "") {
           this.$Message.warning("请填写邮箱");
+        } else if (
+          !/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(
+            this.register.email
+          )
+        ) {
+          this.$Message.warning("请输入正确的邮箱地址");
         } else {
           this.countDown();
+          sendEmail(this.register.email)
+            .then(res => {
+              console.log(res.data);
+            })
+            .catch(err => {
+              console.log(err);
+            });
         }
       },
       countDown() {
@@ -173,11 +224,10 @@
             this.totalTime = 60;
             this.canClick = false; //这里重新开启
           }
-        }, 1000);
-      }
+        })
+      },
     }
-  };
-
+  }
 </script>
 
 <style>
@@ -233,5 +283,4 @@
     background-color: rgba(255, 255, 255, 1);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-
 </style>
