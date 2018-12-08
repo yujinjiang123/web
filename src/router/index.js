@@ -21,6 +21,11 @@ export default new Router({
       component: () => import('@/views/home')
     },
     {
+      path: '/personalCenter',
+      name:'personalCenter',
+      component: () => import('@/views/personalCenter')
+    },
+    {
       path: '/tranformPassword',
       name: 'rePassword',
       meta: {
