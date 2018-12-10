@@ -19,8 +19,28 @@
               </Menu>
             </Sider>
             <Content :style="{padding: '0 0 0 24px', minHeight: '400px', background: '#fff'}">
-                <div class="title"><h3>个人资料</h3></div>
-              
+              <div class="title">
+                <h3>个人资料</h3>
+              </div>
+              <div class="content" style="display:flex">
+                <div class="avatar" style="padding-top:20px;width:100px">
+                  <img src="https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg" class="round_icon">
+                  <Upload :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']"
+                    :max-size="2048" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize"
+                    :before-upload="handleBeforeUpload" action="//jsonplaceholder.typicode.com/posts/">
+                    <a href="#" style="margin-left:20px">上传头像</a>
+                  </Upload>
+                </div>
+                <div style="width:950px;padding:40px 0px 0px 20px">
+                  <div><span>昵称:</span><span>修改资料</span> </div>
+                  <ul style="list-style:none">
+                    <li>12</li>
+                    <li>123</li>
+                    <li>123</li>
+                    <li>123</li>
+                  </ul>
+                </div>
+              </div>
             </Content>
           </Layout>
         </Content>
@@ -57,6 +77,14 @@
     height: 80px;
     line-height: 90px;
     border-bottom: 1px solid #e0e0e0;
+  }
+
+  .round_icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 1px;
   }
 
 </style>
