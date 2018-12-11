@@ -22,7 +22,7 @@
               <div class="title">
                 <h3>个人资料</h3>
               </div>
-              <div class="content" style="display:flex">
+              <div style="display:flex">
                 <div class="avatar" style="padding-top:20px;width:100px">
                   <img src="https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg" class="round_icon">
                   <Upload :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']"
@@ -31,21 +31,28 @@
                     <a href="#" style="margin-left:20px">上传头像</a>
                   </Upload>
                 </div>
-                <div style="width:950px;padding:40px 0px 0px 20px">
-                  <div><span>昵称:</span><span>修改资料</span> </div>
-                  <ul style="list-style:none">
-                    <li>12</li>
-                    <li>123</li>
-                    <li>123</li>
-                    <li>123</li>
+                <div class="content">
+                  <div style="color:#999">ID:<span style="margin-left:10px">{{user.id}}</span><a style="float:right">个人主页></a></div>
+                  <div style="margin:10px 0px 10px 0px;border-bottom:1px solid #e0e0e0;"><span style="margin-right:16px">关注:
+                    </span>
+                    <span>粉丝: </span>
+                  </div>
+                  <div>昵称: <span style="margin-left:10px">{{user.na}}</span><a ref="#" style="float:right">修改资料</a> </div>
+                  <ul style="list-style:none;line-height: 36px;">
+                    <li>实名: <span>{{user.name}}</span></li>
+                    <li>性别: <span>{{user.gender}}</span></li>
+                    <li>生日: <span>{{user.birthday}}</span></li>
+                    <li>地区: <span>{{user.area}}</span></li>
+                    <li>职业: <span>{{user.job}}</span></li>
+                    <li>简介: <span>{{user.des}}</span></li>
                   </ul>
                 </div>
               </div>
             </Content>
           </Layout>
         </Content>
-      </Layout> -->
-      <Footer class="layout-footer-center">2011-2016 &copy; TalkingData</Footer>
+      </Layout>
+      <Footer class="layout-footer-center">2011-2016 &copy; lqy</Footer>
     </Layout>
   </div>
 </template>
@@ -64,7 +71,16 @@
     },
     data() {
       return {
-
+        user: {
+          id: 'lqy1158783206',
+          na:'破天狂魔',
+          name: '玉锦江',
+          gender: '女',
+          birthday: '1999-9-9',
+          area: '郑州',
+          job: "高级程序员",
+          des: '辣椒'
+        }
       }
     },
   }
@@ -85,6 +101,16 @@
     border-radius: 50%;
     overflow: hidden;
     border: solid 1px;
+  }
+
+  div.content {
+    width: 950px;
+    padding: 20px 20px 100px 20px;
+    font-size: 15px;
+  }
+
+  li span {
+    margin-left: 10px;
   }
 
 </style>
