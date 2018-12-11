@@ -26,6 +26,11 @@
         this.$router.push({
           name:"rePassword"
         })
+      },
+      personalCenter(){
+        this.$router.push({
+          name: 'personalCenter',
+        })
       }
     }
   }
