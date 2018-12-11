@@ -9,15 +9,24 @@ export default new Router({
     {
       path: '/',
       name: 'login',
+      meta:{
+        title:"登录"
+      },
       component: () => import('@/views/login')
     },{
       path: '/login',
       name: 'login',
+      meta:{
+        title:"登录"
+      },
       component: () => import('@/views/login')
     },
     {
       path: '/home',
       name: 'home',
+      meta:{
+        title:"首页"
+      },
       component: () => import('@/views/home')
     },
     {
@@ -44,7 +53,7 @@ export default new Router({
     {
       path:"/test",
       name:"test",
-      component:()=>import("@/components/editor/article")
+      component:()=>import("@/views/top")
     },
     {
       path: '/401',

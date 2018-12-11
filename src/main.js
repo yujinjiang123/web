@@ -6,7 +6,7 @@ import router from './router';
 import axios from 'axios';
 import iView from 'iview'; // 导入组件库
 import 'iview/dist/styles/iview.css'; // 导入样式
-Vue.use(iView);
+Vue.use(iView); 
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
