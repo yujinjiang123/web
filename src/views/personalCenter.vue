@@ -37,7 +37,9 @@
                     </span>
                     <span>粉丝: </span>
                   </div>
-                  <div>昵称: <span style="margin-left:10px">{{user.na}}</span><a ref="#" style="float:right">修改资料</a> </div>
+                  <div>昵称: <span style="margin-left:10px">{{user.na}}</span>
+                    <a style="float:right" @click="modifyVisible=true">修改资料</a>
+                  </div>
                   <ul style="list-style:none;line-height: 36px;">
                     <li>实名: <span>{{user.name}}</span></li>
                     <li>性别: <span>{{user.gender}}</span></li>
@@ -54,6 +56,27 @@
       </Layout>
       <Footer class="layout-footer-center">2011-2016 &copy; lqy</Footer>
     </Layout>
+
+    <Modal v-model="modifyVisible" draggable scrollable title="修改资料">
+      <Form :model="userform" label-position="left" :label-width="50">
+        <FormItem label="昵称">
+          <Input v-model="userform.na"></Input>
+        </FormItem>
+        <FormItem label="实名">
+          <Input v-model="userform.name"></Input>
+        </FormItem>
+        <FormItem label="职位">
+          <Input v-model="userform.job"></Input>
+        </FormItem>
+        <FormItem label="性别">
+          <Select v-model="userform.gender" placeholder="Select your city">
+            <Option value="男">男</Option>
+            <Option value="女">女</Option>
+            
+          </Select>
+        </FormItem>
+      </Form>
+    </Modal>
   </div>
 </template>
 
@@ -71,15 +94,19 @@
     },
     data() {
       return {
+        modifyVisible: false,
         user: {
           id: 'lqy1158783206',
-          na:'破天狂魔',
+          na: '破天狂魔',
           name: '玉锦江',
           gender: '女',
           birthday: '1999-9-9',
           area: '郑州',
           job: "高级程序员",
           des: '辣椒'
+        },
+        userform: {
+
         }
       }
     },
