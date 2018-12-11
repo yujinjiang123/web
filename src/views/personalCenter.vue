@@ -57,7 +57,7 @@
       <Footer class="layout-footer-center">2011-2016 &copy; lqy</Footer>
     </Layout>
 
-    <Modal v-model="modifyVisible" draggable scrollable title="修改资料">
+    <Modal v-model="modifyVisible"   scrollable title="修改资料">
       <Form :model="userform" label-position="left" :label-width="50">
         <FormItem label="昵称">
           <Input v-model="userform.na"></Input>
@@ -69,11 +69,20 @@
           <Input v-model="userform.job"></Input>
         </FormItem>
         <FormItem label="性别">
-          <Select v-model="userform.gender" placeholder="Select your city">
+          <Select v-model="userform.gender" placeholder="尊驾雌雄">
             <Option value="男">男</Option>
             <Option value="女">女</Option>
-            
           </Select>
+        </FormItem>
+        <FormItem label="生日">
+          <DatePicker v-model="userform.birthday" type="date" placeholder="选择日期" style="width: 200px"></DatePicker>
+        </FormItem>
+        <FormItem label="地区">
+          <v-distpicker :province="userform.province" :city="userform.city" hide-area @province="onChangeProvince"
+            @city="onChangeCity"></v-distpicker>
+        </FormItem>
+        <FormItem label="简介"> 
+          <Input v-model="userform.des" type="textarea" :rows="4" placeholder="说点什么吧..." />
         </FormItem>
       </Form>
     </Modal>
@@ -85,12 +94,14 @@
   import Search from "@/components/search";
   import Dropdown from "@/components/dropdown";
   import UserAvatar from "@/components/userAvatar";
+  import VDistpicker from 'v-distpicker';
   export default {
     components: {
       Head: Head,
       search: Search,
       dropdown: Dropdown,
-      useravatar: UserAvatar
+      useravatar: UserAvatar,
+      VDistpicker,
     },
     data() {
       return {
@@ -110,6 +121,14 @@
         }
       }
     },
+    methods: {
+      onChangeProvince(data) {
+        this.userform.province = data.value
+      },
+      onChangeCity(data) {
+        this.userform.city = data.value
+      }
+    }
   }
 
 </script>
