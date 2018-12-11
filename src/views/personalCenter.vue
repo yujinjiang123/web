@@ -8,7 +8,6 @@
         </dropdown>
       </Head>
       <Layout :style="{padding: '24px 100px'}">
-
         <Content :style="{padding: '24px 0', background: '#fff'}">
           <Layout>
             <Sider hide-trigger :style="{background: '#fff'}">
@@ -23,7 +22,7 @@
                 <h3>个人资料</h3>
               </div>
               <div style="display:flex">
-                <div class="avatar" style="padding-top:20px;width:100px">
+                <div class="avatar" >
                   <img src="https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg" class="round_icon">
                   <Upload :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']"
                     :max-size="2048" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize"
@@ -57,7 +56,7 @@
       <Footer class="layout-footer-center">2011-2016 &copy; lqy</Footer>
     </Layout>
 
-    <Modal v-model="modifyVisible"   scrollable title="修改资料">
+    <Modal v-model="modifyVisible" :styles="{top:'50px'}" title="修改资料">
       <Form :model="userform" label-position="left" :label-width="50">
         <FormItem label="昵称">
           <Input v-model="userform.na"></Input>
@@ -81,7 +80,7 @@
           <v-distpicker :province="userform.province" :city="userform.city" hide-area @province="onChangeProvince"
             @city="onChangeCity"></v-distpicker>
         </FormItem>
-        <FormItem label="简介"> 
+        <FormItem label="简介">
           <Input v-model="userform.des" type="textarea" :rows="4" placeholder="说点什么吧..." />
         </FormItem>
       </Form>
@@ -139,6 +138,11 @@
     height: 80px;
     line-height: 90px;
     border-bottom: 1px solid #e0e0e0;
+  }
+
+  div.avatar {
+    padding-top: 20px;
+    width: 100px
   }
 
   .round_icon {
