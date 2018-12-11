@@ -5,12 +5,6 @@
         <Icon type="ios-home" size="20"/>首页
       </div>
     </MenuItem>
-    <MenuItem name="2" >
-      <div @click="gotoPage('room')">
-        <Icon type="ios-people"  size="20"/>
-        查看教室
-      </div>
-    </MenuItem>
     <MenuItem name="user" style="right:5%;float:right;border-bottom: 0px">
       <slot name="user"></slot>
     </MenuItem>

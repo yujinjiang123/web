@@ -1,27 +1,38 @@
-import http from 'axios';
 
-const USER_URL="";
+import http from "./axios";
+
+const USER_URL="http://whq6.cn:8080";
 
 export const login=(username,password)=>{
-  let config={
-    data:{
-      username:username,
-      password:password
-    }
+  let data={
+    username:username,
+    password:password
   };
   //TODO
-  return axios.post(url,config);
+  return http.post(`${USER_URL}/user/signIn`,data);
+};
+
+export const sendEmail=(email)=>{
+  let data={
+    email:email
+  };
+  //TODO
+  return http.get(url,data);
+};
+
+
+export const register=(data)=>{
+  //TODO
+  return http.post(url,data);
 };
 
 export const rePassword=(usename,password)=>{
-  let config={
-    data:{
+    let data={
       username:username,
       password:password
-    }
-  };
-  //TODO
-  return axios.post(url,config);
-}
+    };
+    //TODO
+    return http.post(url,config);
+};
 
 

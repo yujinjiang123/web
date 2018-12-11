@@ -8,7 +8,7 @@
       </dropdown>
     </top>
     <div style="width:80%;height:80%;margin:50px">
-      <Steps :current="current" style="width:80%;margin:auto">
+      <Steps :current="current" style="width:80%;margin:50px auto">
         <Step title="原密码" style="width:40%"></Step>
         <Step title="新密码" style="width:40%"></Step>
         <Step title="完成" style="width:20%"></Step>

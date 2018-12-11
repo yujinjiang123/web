@@ -1,12 +1,6 @@
 <template>
   <div class="home">
-    <top>
-      <search @search="searchBlog" slot="search"></search>
-      <p class="editor" slot="editor" @click="gotoEditor"> <Icon size="18" class="icon" type="ios-create-outline" />写博客</p>
-      <dropdown slot="user">
-        <useravatar slot="dropdown"></useravatar>
-      </dropdown>
-    </top>
+    <top @sendBlog="getBlog"></top>
     <div class="lantern">
       <Row type="flex" justify="start" class="code-row-bg">
         <Col :xs="{ span:24}" :sm="{ span: 8, push: 4 }" :md="{ span: 6, push: 5 }">
@@ -27,20 +21,14 @@
 <script>
 import Lantern from "@/components/lantern";
 import Blog from "@/components/blog";
-import Search from "@/components/search";
-import Head from "@/components/head";
-import Dropdown from "@/components/dropdown";
-import UserAvatar from "@/components/userAvatar";
+import Top from "@/views/top";
 import { getAlllogs } from "./../api/api";
 
 export default {
   components: {
     lantern: Lantern,
     blog: Blog,
-    search: Search,
-    top: Head,
-    dropdown: Dropdown,
-    useravatar: UserAvatar
+    top: Top,
   },
   data() {
     return {
@@ -158,7 +146,11 @@ export default {
       console.log(data);
       //TODO
     },
-    getBlog(){
+    getBlog(data){
+      //todo
+      console.log(data);
+    },
+    getBlogs(){
       if(this.totalPageNum==null){
         return ;
       }else if(this.pageNum>this.totalPageNum){
@@ -181,7 +173,7 @@ export default {
   },
   created: function() {
     //获取博客信息
-    this.getBlog();
+    this.getBlogs();
   }
 };
 </script>

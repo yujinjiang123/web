@@ -179,6 +179,21 @@
         }
         this.view = "register";
       },
+      countDown() {
+        if (this.canClick) return; //改动的是这两行代码
+        this.canClick = true;
+        this.codeInfo = this.totalTime + "s后重新发送";
+        let clock = window.setInterval(() => {
+          this.totalTime--;
+          this.codeInfo = this.totalTime + "s后重新发送";
+          if (this.totalTime < 0) {
+            window.clearInterval(clock);
+            this.codeInfo = "重新发送验证码";
+            this.totalTime = 60;
+            this.canClick = false; //这里重新开启
+          }
+        },1000)
+      },
       handleSubmit(name) {
         console.log(name);
         this.$refs[name].validate(valid => {
@@ -205,26 +220,19 @@
           sendEmail(this.register.email)
             .then(res => {
               console.log(res.data);
+              //TODO
             })
             .catch(err => {
               console.log(err);
             });
         }
       },
-      countDown() {
-        if (this.canClick) return; //改动的是这两行代码
-        this.canClick = true;
-        this.codeInfo = this.totalTime + "s后重新发送";
-        let clock = window.setInterval(() => {
-          this.totalTime--;
-          this.codeInfo = this.totalTime + "s后重新发送";
-          if (this.totalTime < 0) {
-            window.clearInterval(clock);
-            this.codeInfo = "重新发送验证码";
-            this.totalTime = 60;
-            this.canClick = false; //这里重新开启
-          }
-        })
+      register(){
+        //TODO
+        this.gotoLogin();
+      },
+      login(){
+        //TODO
       },
     }
   }

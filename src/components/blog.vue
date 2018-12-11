@@ -1,7 +1,7 @@
 <template>
   <div style="background:#eee;padding:1px;margin-bottom:2px">
     <Card :bordered="false">
-      <p class="title" @click="gotoBlog(blog.id)" slot="title">{{blog.title}}</p>
+      <p class="title" @click="gotoBlog(blog.url)" slot="title">{{blog.title}}</p>
       <p>{{blog.content}}</p>
       <div class="info">
         <Avatar :src="blog.image"/>
@@ -28,14 +28,15 @@
     methods: {
       gotoBlog(id){
         console.log(id);
+        window.location.href=id;
         //TODO
-        goBlog(id)
-          .then(res=>{
-            console.log(res);
-          })
-          .catch(err=>{
-            console.log(err);
-          })
+        // goBlog(id)
+        //   .then(res=>{
+        //     console.log(res);
+        //   })
+        //   .catch(err=>{
+        //     console.log(err);
+        //   })
       },
     }
   };
