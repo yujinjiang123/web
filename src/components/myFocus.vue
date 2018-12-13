@@ -9,7 +9,7 @@
         <li>
             <img :src="item.avatar" class="round_icon">
             <a :href="item.url">{{item.na}}</a>
-            <button style="float:right">取消关注</button>
+            <Button type="warning" ghost style="float:right">取消关注</Button>
         </li>
       </ul>
     </div>
