@@ -70,6 +70,14 @@ export default new Router({
       component: () => import('@/views/tranformPassword')
     },
     {
+      path: '/article',
+      name: 'article',
+      meta: {
+        hideInMenu: true
+      },
+      component: () => import('@/views/editor/markdownview')
+    },
+    {
       path: '/editor/markdown',
       name: 'markdown',
       meta: {
@@ -80,7 +88,7 @@ export default new Router({
     {
       path:"/test",
       name:"test",
-      component:()=>import("@/views/top")
+      component:()=>import("@/components/FilterList")
     },
     {
       path: '/401',

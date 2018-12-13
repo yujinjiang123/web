@@ -14,7 +14,7 @@
         <Step title="完成" style="width:20%"></Step>
       </Steps>
       <div class="content">
-        <Input v-if="current==0"  v-model="oldPassword" type="password" placeholder="请输入旧密码" style="width: 300px;margin:auto"></Input>
+        <Input v-if="current==0"  size="large" type="email" v-model="email" placeholder="请输入邮箱地址" style="width: 300px;margin:auto" ></Input>
         <Form v-if="current==1" ref="formInline" :model="formInline" :rules="ruleInline" style="width: 300px;margin:auto">
           <FormItem prop="newPassword1">
             <Input type="password" v-model="formInline.newPassword1" placeholder="请输入新密码" style="width: 300px;margin:auto"></Input>
@@ -36,22 +36,35 @@
   import UserAvatar from "@/components/userAvatar";
 export default {
   data() {
+    const validatePassword = (rule, value, callback) => {
+      if (value === "") {
+        return callback(new Error("请输入密码"));
+      } else if (
+        this.newpassword1 != this.newpassword2 &&
+        this.newpassword2 != ""
+      ) {
+        callback("两次密码不一致");
+      } else {
+        callback();
+      }
+    };
     return {
       current: 0,
-      oldPassword: "",
+      email:'',
       formInline: {
         newPassword1: "",
         newPassword2: ""
       },
       ruleInline: {
-        oldPassword:[
-          { required: true, message: '请输入密码', trigger: 'blur' }
-        ],
         newPassword1: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          {required: true,
+            validator: validatePassword,
+            trigger: "blur" }
         ],
         newPassword2: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
+          {required: true,
+            validator: validatePassword,
+            trigger: "blur"},
           { type: 'string', min: 6, message: '密码不能少于六位', trigger: 'blur' }
         ]
       }
@@ -65,10 +78,12 @@ export default {
   },
   methods: {
     next(name) {
-      if(this.current==1){
+      if(this.current==0){
+        this.SendEmail();
+      }else if(this.current==1){
         this.$refs[name].validate((valid) => {
           if (valid) {
-            this.current += 1;
+            this.current +=1;
           }else{
             //TODO
           }
@@ -78,10 +93,31 @@ export default {
           name:"home",
         })
       } else {
+        this.current +=1;
+      }
+    },
+    SendEmail() {
+      if (this.email === "") {
+        this.$Message.warning("请填写邮箱");
+      } else if (
+        !/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(
+          this.email
+        )
+      ) {
+        this.$Message.warning("请输入正确的邮箱地址");
+      } else {
+        // this.countDown();
+        // sendEmail(this.register.email)
+        //   .then(res => {
+        //     console.log(res.data);
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
         this.current += 1;
       }
     }
-  }
+  },
 };
 </script>
 <style>

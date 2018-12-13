@@ -1,7 +1,6 @@
 <template>
   <div>
     <Layout class="layout">
-
       <Head>
         <dropdown slot="user">
           <useravatar slot="dropdown"></useravatar>
@@ -43,7 +42,16 @@
     },
     data() {
       return {
-
+        user: {
+          id: 'lqy1158783206',
+          na:'破天狂魔',
+          name: '刘琦贇',
+          gender: '女',
+          birthday: '1999-9-9',
+          area: '郑州',
+          job: "高级程序员",
+          des: '辣椒'
+        }
       }
     },
     methods: {

@@ -2,7 +2,7 @@
   <div class="login">
     <Row type="flex" justify="center" class="code-row-bg">
       <Col :xs="{ span:20 }" :sm="{ span: 10}" :md="{ span: 8 }" :lg="{ span:6 }" :xl="{ span:6 }">
-        <login-form @listenToChileEvent="Login"></login-form>
+        <login-form ></login-form>
       </Col>
     </Row>
   </div>
@@ -15,31 +15,6 @@ export default {
   components: {
     loginForm: LoginForm
   },
-  methods: {
-    //登录验证
-    Login(data) {
-      console.log(data);
-      let msg = "登录成功";
-      //TODO
-      // login(data)
-      //   .then(res=>{
-      //     console.log(res);
-      //     this.$router.push({
-      //       name: "home"
-      //     });
-      //   })
-      //   .catch(err=>{
-      //     console.log(err);
-      //     msg="登录失败";
-      //   });
-      this.$Message.success(msg);
-      this.$router.replace({
-        name: "home"
-      });
-    },
-    register(){
-    }
-  }
 };
 </script>
 

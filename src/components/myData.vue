@@ -65,7 +65,7 @@
 </template>
 
 <script>
-  import VDistpicker from 'v-distpicker';
+  import VDistpicker from 'v-distccpicker';
   export default {
     components: {
       VDistpicker,
