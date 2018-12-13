@@ -24,7 +24,7 @@
     </Form>
     <Form v-if="view=='register'" class="form" ref="register" :model="register" :rules="ruleInline">
       <FormItem prop="registerUsername">
-        <Input size="large" type="text" v-model="register.username" placeholder="用户名"></Input>
+        <Input size="large" type="text" v-model="register.username" placeholder="用户名/学号"></Input>
       </FormItem>
       <FormItem prop="password1">
         <Input size="large" type="password" v-model="register.password1" placeholder="请输入密码"></Input>
@@ -39,7 +39,7 @@
         <div style="display: flex">
           <Input type="text" v-model="register.code" style="width:50%;" placeholder="请输入验证码"></Input>
           <Button
-            @click="sendEmail"
+            @click="SendEmail"
             class="send-code"
             style="width:50%;"
             :disabled="canClick"
@@ -48,14 +48,14 @@
         </div>
       </FormItem>
       <FormItem>
-        <Button class="submit" type="success" @click="register('register')">注册</Button>
+        <Button class="submit" type="success" @click="Register('register')">注册</Button>
       </FormItem>
     </Form>
   </div>
 </template>
 <script>
-  import {sendEmail} from "../api/api";
-
+  import {login ,register,sendEmail} from "../api/user";
+  import md5 from 'js-md5';
   export default {
     data() {
       const validateResisterUsername = (rule, value, callback) => {
@@ -198,15 +198,11 @@
         console.log(name);
         this.$refs[name].validate(valid => {
           if (valid) {
-            var data = {
-              username: this.formInline.username,
-              password: this.formInline.password
-            };
-            this.$emit("listenToChileEvent", data);
+            this.Login();
           }
         });
       },
-      sendEmail() {
+      SendEmail() {
         if (this.register.email === "") {
           this.$Message.warning("请填写邮箱");
         } else if (
@@ -220,19 +216,49 @@
           sendEmail(this.register.email)
             .then(res => {
               console.log(res.data);
-              //TODO
             })
             .catch(err => {
               console.log(err);
             });
         }
       },
-      register(){
-        //TODO
-        this.gotoLogin();
+      Register(name){
+        this.$refs[name].validate(valid => {
+          if(valid){
+            let password=md5(this.register.password1);
+            let data={
+              studentId:this.register.username,
+              email:this.register.email,
+              code:this.register.code,
+              password:password,
+            };
+            console.log(data);
+            register(data)
+              .then(res=>{
+                console.log(res);
+                this.gotoLogin();
+              })
+              .catch(err=>{
+                console.log(err);
+                this.$message.error("注册失败");
+              })
+          }
+        });
       },
-      login(){
-        //TODO
+      Login(){
+        let password=md5(this.formInline.password);
+        console.log(password);
+        login(this.formInline.username,password)
+          .then(res=>{
+            console.log(res);
+            this.$message.success("登录成功");
+            this.$router.push({
+              name:"home",
+            })
+          })
+          .catch(err=>{
+            console.log(err);
+          })
       },
     }
   }

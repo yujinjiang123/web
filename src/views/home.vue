@@ -8,12 +8,17 @@
         </Col>
       </Row>
     </div>
-    <div class="blogs" v-for="blog in blogs">
-      <Row type="flex" justify="start" class="code-row-bg">
-        <Col :xs="{ span:22,push:1 }" :sm="{ span: 12, push: 4 }" :md="{ span: 12, push: 5 }">
-          <blog :blog="blog" @click="gotoBlog(blog.id)"></blog>
-        </Col>
-      </Row>
+         <filterList class="filterList"></filterList> 
+    <div class="content">
+       <div class="blogs">
+          <div class="blog" v-for="blog in blogs">
+            <Row type="flex" justify="start" class="code-row-bg">
+             <Col :xs="{ span:22,push:1 }" :sm="{ span: 12, push: 4 }" :md="{ span: 12, push: 5 }">
+                <blog :blog="blog" id="blog.id"></blog>
+              </Col>
+          </Row>
+        </div>
+       </div> 
   </div>
   </div>
 </template>
@@ -22,6 +27,7 @@
 import Lantern from "@/components/lantern";
 import Blog from "@/components/blog";
 import Top from "@/views/top";
+import FilterList from "@/components/FilterList";
 import { getAlllogs } from "./../api/api";
 
 export default {
@@ -29,6 +35,7 @@ export default {
     lantern: Lantern,
     blog: Blog,
     top: Top,
+    filterList:FilterList
   },
   data() {
     return {
@@ -193,9 +200,23 @@ export default {
   padding: 15px;
 }
 
-.blogs {
+.blogs{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog {
   width: 100%;
   height: auto;
+}
+
+.content{
+  display: flex;
+}
+.filterList{
+  position: absolute;
+  margin-left:12%;
 }
 
 </style>
