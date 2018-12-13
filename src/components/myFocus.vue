@@ -8,8 +8,8 @@
       <ul v-for="(item,index) in focusList">
         <li>
             <img :src="item.avatar" class="round_icon">
-            <a :href="item.url">{{item.na}}</a>
-            <Button type="warning" ghost style="float:right">取消关注</Button>
+            <a :href="item.url" >{{item.nickname}}</a>
+            <Button type="warning" ghost style="float:right;margin-top:10px">取消关注</Button>
         </li>
       </ul>
     </div>
@@ -22,15 +22,15 @@
       return{
         focusList:[
           {
-            na:'小白',
+            nickname:'小白',
             avatar:'https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',
           },
           {
-            na:'小黑',
+            nickname:'小黑',
             avatar:'https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',
           },
          {
-            na:'小蓝',
+            nickname:'小蓝',
             avatar:'https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',
           },
         ]
@@ -63,6 +63,7 @@
   li a {
     text-decoration: none;
     color: #4d4d4d;
+    margin-left:15px;
   }
 
 </style>

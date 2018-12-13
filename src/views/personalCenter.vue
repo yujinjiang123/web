@@ -10,11 +10,11 @@
         <Content :style="{ background: '#fff',margin:'30px 150px'}">
           <Layout :style="{}">
             <Sider hide-trigger :style="{background: '#fff'}">
-              <Menu active-name="1-1" theme="light" width="auto" :open-names="['1']">
-                <MenuItem name="1-1" to='/personalCenter/myData'>个人资料</MenuItem>
-                <MenuItem name="1-2" to='/personalCenter/myCollection'>我的收藏</MenuItem>
-                <MenuItem name="1-3" to='/personalCenter/myFocus'>我的关注</MenuItem>
-                <MenuItem name="1-4" to='/personalCenter/myFans'>我的粉丝</MenuItem>
+              <Menu active-nickname="1-1" theme="light" width="auto" :open-names="['1']">
+                <MenuItem nickname="1-1" to='/personalCenter/myData'>个人资料</MenuItem>
+                <MenuItem nickname="1-2" to='/personalCenter/myCollection'>我的收藏</MenuItem>
+                <MenuItem nickname="1-3" to='/personalCenter/myFocus'>我的关注</MenuItem>
+                <MenuItem nickname="1-4" to='/personalCenter/myFans'>我的粉丝</MenuItem>
               </Menu>
             </Sider>
             <Content :style="{padding: '0 24px', minHeight: '400px', background: '#fff'}">
@@ -43,9 +43,9 @@
     data() {
       return {
         user: {
-          id: 'lqy1158783206',
-          na:'破天狂魔',
-          name: '刘琦贇',
+          stuId: 'lqy1158783206',
+          username:'破天狂魔',
+          nickname: '刘琦贇',
           gender: '女',
           birthday: '1999-9-9',
           area: '郑州',

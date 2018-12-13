@@ -6,7 +6,7 @@
     </div>
     <div>
       <ul v-for="(item,index) in collectionList">
-        <li><a :href="item.url">{{item.name}}</a> <label><span>{{item.date}}</span><em @click="remove(index)">取消</em></label></li>
+        <li><a :href="item.url">{{item.title}}</a> <label><span>{{item.date}}</span><em @click="remove(index)">取消</em></label></li>
       </ul>
     </div>
   </div>
@@ -18,17 +18,17 @@
       return{
         collectionList:[
           {
-            name:'百度',
+            title:'百度',
             url:'www.baidu.com',
             date:'2018-12-1',
           },
           {
-            name:'百度',
+            title:'百度',
             url:'www.baidu.com',
             date:'2018-12-1',
           },
           {
-            name:'百度',
+            title:'百度',
             url:'www.baidu.com',
             date:'2018-12-1',
           },

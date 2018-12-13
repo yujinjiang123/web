@@ -5,8 +5,12 @@
       <!-- <span float:right>共1条</span> -->
     </div>
     <div>
-      <ul v-for="(item,index) in collectionList">
-        <li><a :href="item.url">{{item.name}}</a> <label><span>{{item.date}}</span><em @click="remove(index)">取消</em></label></li>
+      <ul v-for="(item,index) in fansList">
+        <li>
+            <img :src="item.avatar" class="round_icon">
+            <a :href="item.url">{{item.nickname}}</a>
+            <Button type="warning" ghost style="float:right;margin-top:10px">对其隐藏</Button>
+        </li>
       </ul>
     </div>
   </div>
@@ -16,21 +20,18 @@
   export default {
     data(){
       return{
-        collectionList:[
+        fansList:[
           {
-            name:'百度',
-            url:'www.baidu.com',
-            date:'2018-12-1',
+            nickname:'小白',
+            avatar:'https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',
           },
           {
-            name:'百度',
-            url:'www.baidu.com',
-            date:'2018-12-1',
+            nickname:'小黑',
+            avatar:'https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',
           },
-          {
-            name:'百度',
-            url:'www.baidu.com',
-            date:'2018-12-1',
+         {
+            nickname:'小蓝',
+            avatar:'https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',
           },
         ]
       }
@@ -45,7 +46,16 @@
 </script>
 
 <style scoped>
+.round_icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 1px;
+    float:left;
+  }
   li {
+    line-height: 50px;
     font-size: 17px;
     padding: 10px 0 8px 10px;
   }
@@ -53,21 +63,7 @@
   li a {
     text-decoration: none;
     color: #4d4d4d;
-  }
-
-  li label {
-    float: right
-  }
-
-  label span {
-    margin-right: 15px;
-    color: #ccc;
-  }
-
-  label em {
-    font-style: normal;
-    color: #999;
-    cursor: pointer;
+    margin-left:15px;
   }
 
 </style>
