@@ -4,18 +4,17 @@
       <h3>个人资料</h3>
     </div>
     <div style="display:flex">
-      <!-- <div class="avatar" >
-                  <img src="https://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg" class="round_icon">
-                  <Upload :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']"
-                    :max-size="2048" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize"
-                    :before-upload="handleBeforeUpload" action="//jsonplaceholder.typicode.com/posts/">
-                    <a href="#" style="margin-left:20px">上传头像</a>
-                  </Upload>
-                </div> -->
+      <div class="avatar">
+        <img :src="user.avatar" class="round_icon">
+        <Upload :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']" :max-size="2048"
+          :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize" action="">
+          <a href="#" style="margin-left:20px">上传头像</a>
+        </Upload>
+      </div>
       <div class="content">
         <div style="color:#999">ID:<span style="margin-left:10px">{{user.id}}</span><a style="float:right">个人主页></a></div>
         <div style="margin:10px 0px 10px 0px;border-bottom:1px solid #e0e0e0;"><span style="margin-right:16px">
-          关注: <router-link to="/personalCenter/myFocus">{{user.focusNum}}</router-link>
+            关注: <router-link to="/personalCenter/myFocus">{{user.focusNum}}</router-link>
           </span>
           <span>粉丝: <router-link to="/personalCenter/myFans">{{user.fans}}</router-link></span>
         </div>
@@ -61,18 +60,26 @@
         </FormItem>
       </Form>
     </Modal>
+
+    <Modal title="View Image" v-model="visible">
+      <img :src="user.avatar" v-if="visible" style="width: 100%">
+    </Modal>
   </div>
   </div>
 </template>
 
 <script>
   // import VDistpicker from 'v-distccpicker';
+  import {
+    personalData
+  } from '../api/user';
   export default {
     components: {
       // VDistpicker,
     },
     data() {
       return {
+        visible: false,
         modifyVisible: false,
         user: {
           id: 'lqy1158783206',
@@ -115,7 +122,38 @@
       handleSubmitUserform() {
         this.user = JSON.parse(JSON.stringify(this.userform));
         this.userform = JSON.parse(JSON.stringify(this.defaultUserform));
-      }
+      },
+      handleView(name) {
+        this.imgName = name;
+        this.visible = true;
+      },
+      handleSuccess(res, file) {
+        this.user.avatar = file.url;
+        this.userform.avatar=file.url;
+      },
+      handleFormatError(file) {
+        this.$Notice.warning({
+          title: '文件格式不正确',
+          desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+        });
+      },
+      handleMaxSize(file) {
+        this.$Notice.warning({
+          title: '文件大小超出限制',
+          desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+        });
+      },
+    },
+    mounted: function () {
+      personalData().then(
+        (res) => {
+          this.user = res.data.user;
+        }, (res) => {
+          console.log(res);
+        }
+      ).catch((err) => {
+        console.log(err);
+      })
     }
   }
 

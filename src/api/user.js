@@ -23,3 +23,12 @@ export const register=(data)=>{
   });
 };
 
+export const personalData=()=>{
+  return http.get('http://kingsword.xyz:8080/user/getUserInfo',{});
+};
+
+export const changePersonalData=(user)=>{
+  return http.get('http://kingsword.xyz:8080/user/changeUserInfo',{
+    user:user
+  })
+}
