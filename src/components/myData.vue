@@ -61,7 +61,7 @@
       </Form>
     </Modal>
 
-    <Modal title="View Image" v-model="visible">
+    <Modal title="头像" v-model="visible" footer-hide >
       <img :src="user.avatar" v-if="visible" style="width: 100%">
     </Modal>
   </div>
@@ -85,6 +85,7 @@
           id: 'lqy1158783206',
           nickname: '破天狂魔',
           username: '玉锦江',
+          avatar:'https://i.loli.net/2017/08/21/599a521472424.jpg',
           gender: '女',
           birthday: '1999-9-9',
           province: "河南",
@@ -125,7 +126,7 @@
       },
       handleView() {
         // this.imgName = name;
-        // this.visible = true;
+        this.visible = true;
         console.log('handleView');
         
       },
