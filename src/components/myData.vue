@@ -5,7 +5,7 @@
     </div>
     <div style="display:flex">
       <div class="avatar">
-        <img :src="user.avatar" class="round_icon">
+        <img :src="user.avatar" style="cursor: pointer;" @click="handleView" class="round_icon">
         <Upload :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']" :max-size="2048"
           :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize" action="">
           <a href="#" style="margin-left:20px">上传头像</a>
@@ -38,7 +38,7 @@
           <Input v-model="userform.nickname"></Input>
         </FormItem>
         <FormItem label="实名">
-          <Input v-model="userform.name" placeholder="不会泄露的"></Input>
+          <Input v-model="userform.username" placeholder="不会泄露的"></Input>
         </FormItem>
         <FormItem label="职位">
           <Input v-model="userform.job"></Input>
@@ -123,9 +123,11 @@
         this.user = JSON.parse(JSON.stringify(this.userform));
         this.userform = JSON.parse(JSON.stringify(this.defaultUserform));
       },
-      handleView(name) {
-        this.imgName = name;
-        this.visible = true;
+      handleView() {
+        // this.imgName = name;
+        // this.visible = true;
+        console.log('handleView');
+        
       },
       handleSuccess(res, file) {
         this.user.avatar = file.url;

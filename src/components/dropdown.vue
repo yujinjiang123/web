@@ -29,7 +29,6 @@
       },
       personalCenter(){
         this.$router.push({
-          // path: '/personalCenter/myData',
           name:'my-data'
         })
       }
