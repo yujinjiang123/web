@@ -2,7 +2,7 @@
   <div>
     <div class="title">
       <h3>我的关注</h3>
-      <!-- <span float:right>共1条</span> -->
+      <span class="num">共{{focusList.length}}条</span>
     </div>
     <div>
       <ul v-for="(item,index) in focusList">

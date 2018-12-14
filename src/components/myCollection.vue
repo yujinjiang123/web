@@ -2,7 +2,7 @@
   <div>
     <div class="title">
       <h3>我的收藏</h3>
-      <!-- <span float:right>共1条</span> -->
+      <span class="num">共{{collectionList.length}}条</span>
     </div>
     <div>
       <ul v-for="(item,index) in collectionList">

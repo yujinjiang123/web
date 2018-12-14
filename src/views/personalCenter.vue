@@ -16,7 +16,7 @@
                 <MenuItem name="1-2" to='/personalCenter/myCollection'>我的收藏</MenuItem>
                 <MenuItem name="1-3" to='/personalCenter/myFocus'>我的关注</MenuItem>
                 <MenuItem name="1-4" to='/personalCenter/myFans'>我的粉丝</MenuItem>
-                <Divider style="margin:0"/>
+                <Divider style="margin:0" />
                 <MenuItem to="//www.baidu.com" target='_blank'>我的博客</MenuItem>
               </Menu>
             </Sider>
@@ -74,6 +74,13 @@
   h3 {
     font-size: 26px;
     color: #3d3d3d;
+    display: inline-block;
+  }
+
+  span.num {
+    float: right;
+    color: #4d4d4d;
+    font-size: 14px;
   }
 
   ul {

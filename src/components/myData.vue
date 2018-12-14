@@ -148,6 +148,7 @@
       },
     },
     mounted: function () {
+      this.userform = JSON.parse(JSON.stringify(this.user));
       personalData().then(
         (res) => {
           this.user = res.data.user;
