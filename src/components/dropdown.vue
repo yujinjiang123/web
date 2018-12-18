@@ -29,7 +29,7 @@
       },
       personalCenter(){
         this.$router.push({
-          name: 'personalCenter',
+          name:'my-data'
         })
       }
     }

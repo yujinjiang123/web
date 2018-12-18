@@ -29,25 +29,6 @@ export default new Router({
       },
       component: () => import('@/views/home')
     },
-    // {
-    //   path: "/",
-    //   component: resolve => require(["@/views/components/Layout"], resolve),
-    //   iconCls: "iconfont icon-vote", // 图标样式class
-    //   children: [
-    //     {
-    //       path: "/program/vote/pk",
-    //       component: resolve =>
-    //         require(["@/views/programManage/VotePKManage"], resolve),
-    //       name: "program-votepk",
-    //       meta: {
-    //         title: "PK投票管理",
-    //         iconCls: "iconfont icon-vote", // 图标样式class
-    //         roles: ["PROGRAM_ADMIN"]
-    //       }
-    //     }
-    //   ],
-    //   hidden: true
-    // },
     {
       path: '/personalCenter',
       name:'personalCenter',
@@ -55,27 +36,27 @@ export default new Router({
       children:[
         {
           path:"/personalCenter/myData",
-          component:()=> import('@/views/myData'),
+          component:()=> import('@/components/myData'),
           name: 'my-data',
         },
         {
           path:"/personalCenter/myCollection",
-          component:()=> import('@/views/myCollection'),
-          name: 'my-collection',
+          component:()=> import('@/components/myCollection'),
+          name: 'my-collection',  
         },
         {
           path:"/personalCenter/myBlog",
-          component:()=> import('@/views/myBlog'),
+          component:()=> import('@/components/myBlog'),
           name: 'my-blog',
         },
         {
           path:"/personalCenter/myFocus",
-          component:()=> import('@/views/myFocus'),
+          component:()=> import('@/components/myFocus'),
           name: 'my-focus',
         },
         {
           path:"/personalCenter/myFans",
-          component:()=> import('@/views/myFans'),
+          component:()=> import('@/components/myFans'),
           name: 'my-fans',
         }
       ]

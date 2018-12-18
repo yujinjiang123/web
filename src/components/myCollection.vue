@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="title">
-      <h3>我的粉丝</h3>
-      <!-- <span float:right>共1条</span> -->
+      <h3>我的收藏</h3>
+      <span class="num">共{{collectionList.length}}条</span>
     </div>
     <div>
       <ul v-for="(item,index) in collectionList">
-        <li><a :href="item.url">{{item.name}}</a> <label><span>{{item.date}}</span><em @click="remove(index)">取消</em></label></li>
+        <li><a :href="item.url" target="_blank">{{item.title}}</a> <label><span>{{item.date}}</span><em @click="remove(index)">取消</em></label></li>
       </ul>
     </div>
   </div>
@@ -14,29 +14,28 @@
 
 <script>
   export default {
-    data(){
-      return{
-        collectionList:[
-          {
-            name:'百度',
-            url:'www.baidu.com',
-            date:'2018-12-1',
+    data() {
+      return {
+        collectionList: [{
+            title: '百度',
+            url: '//www.baidu.com',
+            date: '2018-12-1',
           },
           {
-            name:'百度',
-            url:'www.baidu.com',
-            date:'2018-12-1',
+            title: '百度',
+            url: '//www.baidu.com',
+            date: '2018-12-1',
           },
           {
-            name:'百度',
-            url:'www.baidu.com',
-            date:'2018-12-1',
+            title: '百度',
+            url: '//www.baidu.com',
+            date: '2018-12-1',
           },
         ]
       }
     },
-    methods:{
-      remove(index){
+    methods: {
+      remove(index) {
         this.collectionList.splice(index, 1)
       }
     }
