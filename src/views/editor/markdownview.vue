@@ -1,11 +1,15 @@
 <template>
   <div>
-    <span class="markdown-body" v-html="essay"></span>
+    <top></top>
+    <div class="content">
+      <span class="markdown-body" v-html="essay"></span>
+    </div>
   </div>
 </template>
 
 
 <script>
+  import Top from "../top";
   export default {
     name: "editor",
     data() {
@@ -13,14 +17,20 @@
         essay:"",
       };
     },
-    props:{
-      id:"",
+    components:{
+      top:Top
     },
-    created(){
-      console.log(this.id);
+    created() {
+      this.essay=localStorage.essay;
+      console.log(this.essay);
     }
   };
 </script>
-<style>
-  @import "../../../node_modules/mavon-editor/dist/css/index.css";
+<style scoped>
+  @import "../../assets/dist/css/index.css";
+  .content{
+    width:80%;
+    margin-left:20%;
+    margin-top:3%;
+  }
 </style>

@@ -59,7 +59,7 @@
   export default {
     data() {
       const validateResisterUsername = (rule, value, callback) => {
-        if (value === "") {
+        if (this.register.username==="") {
           return callback(new Error("请输入用户名"));
         } else {
           callback();
@@ -178,6 +178,7 @@
           this.$refs["formInline"].resetFields();
         }
         this.view = "register";
+        this.register.username="";
       },
       countDown() {
         if (this.canClick) return; //改动的是这两行代码
@@ -227,20 +228,25 @@
           if(valid){
             let password=md5(this.register.password1);
             let data={
-              studentId:this.register.username,
+              username:this.register.username,
+              password:password,
               email:this.register.email,
               code:this.register.code,
-              password:password,
             };
             console.log(data);
             register(data)
               .then(res=>{
                 console.log(res);
-                this.gotoLogin();
+                if(res.status){
+                  this.$Message.success("注册成功");
+                  this.gotoLogin();
+                }else{
+                  this.$Message.error("注册失败");
+                }
               })
               .catch(err=>{
                 console.log(err);
-                this.$message.error("注册失败");
+                this.$Message.error("注册失败");
               })
           }
         });
@@ -251,10 +257,16 @@
         login(this.formInline.username,password)
           .then(res=>{
             console.log(res);
-            this.$message.success("登录成功");
-            this.$router.push({
-              name:"home",
-            })
+            // localStorage.username=res.data.stuId;
+            console.log(localStorage.username);
+            if(res.status){
+              this.$message.success("登录成功");
+              this.$router.push({
+                name:"home",
+              })
+            }else{
+              this.$message.error("账号或密码错误");
+            }
           })
           .catch(err=>{
             console.log(err);

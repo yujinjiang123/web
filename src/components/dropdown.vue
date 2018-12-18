@@ -6,8 +6,8 @@
     <DropdownMenu slot="list">
       <DropdownItem><span>我的消息</span></DropdownItem>
       <DropdownItem><span @click="personalCenter">个人中心</span></DropdownItem>
-      <!-- <DropdownItem><span>我的博客</span></DropdownItem>
-      <DropdownItem ><span @click="rePassword">修改密码</span></DropdownItem> -->
+      <!--<DropdownItem><span>我的博客</span></DropdownItem>-->
+      <DropdownItem ><span @click="rePassword">修改密码</span></DropdownItem>
       <DropdownItem><span @click="exit">退出登录</span></DropdownItem>
     </DropdownMenu>
   </Dropdown>

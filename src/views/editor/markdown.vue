@@ -4,7 +4,7 @@
       <Input v-model="title" class="btn" :maxlength="50" placeholder="请输入文章标题"
              style="width:60%;margin-right:26%"></Input>
       <Button type="primary" class="btn" @click="gotoHome">返回首页</Button>
-      <Button type="error" class="btn" @click="dialogVisible = true">发布</Button>
+      <Button type="error" class="btn" @click="publishBlog">发布</Button>
     </div>
     <markdown class="markdown" @editor="editor" :fullscreen="true"></markdown>
     <el-dialog
@@ -23,7 +23,7 @@
 
 <script>
   import markdown from "../../components/editor/markdown";
-  import {publicBlog} from "../../api/api";
+  import {publicBlog} from "../../api/blog";
 
   export default {
     data() {
@@ -31,14 +31,29 @@
         dialogVisible: false,
         title: "",
         contentHtml: "",
-        v1: "",
-        v2: "",
       }
     },
     components: {
       markdown: markdown
     },
     methods: {
+      publishBlog(){
+        if(this.title===''){
+          this.$message({
+            message: '请输入标题',
+            type: 'error'
+          });
+          return ;
+        }
+        if(this.contentHtml===''){
+          this.$message({
+            message: '请输入内容',
+            type: 'error'
+          });
+          return;
+        }
+        this.dialogVisible=true;
+      },
       handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
@@ -51,21 +66,31 @@
         this.contentHtml = data;
       },
       submit() {
+        let config={
+          message:'发送成功',
+          type: 'success'
+        };
         console.log(this.contentHtml);
         this.dialogVisible = false;
+        let stuId=localStorage.username;
         let params = {
-          username: "于锦江",
-          stuId: "123456",
+          stuId:stuId,
+          username: stuId,
           title: this.title,
           content: this.contentHtml
         };
         publicBlog(params)
           .then(res => {
             console.log(res);
-            if(res.success){
-              this.$Message.success('发布成功');
+            if(res.status){
+              this.$message(config);
+              this.$router.replace({
+                name:"home"
+              })
             }else{
-              this.$Message.error('发送失败');
+              config.message='发送失败';
+              config.type="error";
+              this.$message(config);
             }
           })
           .catch(err => {
@@ -78,11 +103,10 @@
         })
       }
     },
-
   }
 </script>
 
-<style>
+<style >
   .editor {
     width: 100%;
     height: 100%;

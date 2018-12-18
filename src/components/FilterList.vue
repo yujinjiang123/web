@@ -1,5 +1,5 @@
 <template>
-  <Affix offset-top="50">
+  <Affix :offset-top="50">
     <div class="list">
         <div v-for="item in items" class="item">
             {{item.title}}

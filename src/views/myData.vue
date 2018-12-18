@@ -53,7 +53,7 @@
           <DatePicker v-model="userform.birthday" type="date" placeholder="选择日期" style="width: 200px"></DatePicker>
         </FormItem>
         <FormItem label="地区">
-          <v-distpicker :province="userform.province" :city="userform.city" hide-area @province="onChangeProvince"></v-distpicker>
+          <!--<v-distpicker :province="userform.province" :city="userform.city" hide-area @province="onChangeProvince"></v-distpicker>-->
         </FormItem>
         <FormItem label="简介">
           <Input v-model="userform.des" type="textarea" :rows="4" placeholder="说点什么吧..." />
@@ -65,10 +65,10 @@
 </template>
 
 <script>
-  import VDistpicker from 'v-distccpicker';
+  // import VDistpicker from 'v-distccpicker';
   export default {
     components: {
-      VDistpicker,
+      // VDistpicker,
     },
     data() {
       return {
