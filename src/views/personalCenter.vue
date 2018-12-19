@@ -1,7 +1,8 @@
 <template>
   <div>
     <Layout class="layout">
-
+    
+    
       <Head>
         <dropdown slot="user">
           <useravatar slot="dropdown"></useravatar>
