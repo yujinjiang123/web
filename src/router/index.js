@@ -31,6 +31,7 @@ export default new Router({
     },
     {
       path: '/personalCenter',
+      redirect:"/personalCenter/myData",
       name:'personalCenter',
       component: () => import('@/views/personalCenter'),
       children:[
