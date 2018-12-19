@@ -47,3 +47,6 @@ export const changePassword=(email,password)=>{
   })
 };
 
+export const personalData=(userId)=>{
+  return http.post(`${USER_URL}/user/~~~?userId=${userId}`)
+}
