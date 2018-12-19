@@ -16,8 +16,9 @@ const get = (url, config) => {
   return new Promise((resolve, reject) => {
     http.get(url, config)
       .then(res => {
+        console.log(res);
         if (res.status === 200) {
-          resolve(res.data);
+          resolve(res);
         } else {
           reject(res);
         }
@@ -38,7 +39,7 @@ const post = (url, config) => {
     http.post(url, config)
       .then(res => {
         if (res.status === 200) {
-          resolve(res.data);
+          resolve(res);
         } else {
           reject(res);
         }

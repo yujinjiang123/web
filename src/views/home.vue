@@ -1,14 +1,16 @@
 <template>
   <div class="home">
-    <top @sendBlog="getBlog"></top>
+    <top @sendBlog="searchBlog"></top>
     <div class="lantern">
-      <Row type="flex" justify="start" class="code-row-bg">
-        <Col :xs="{ span:24}" :sm="{ span: 8, push: 4 }" :md="{ span: 6, push: 5 }">
-          <lantern :array="images"></lantern>
-        </Col>
-      </Row>
+      <Scroll :on-reach-bottom="handleReachBottom">
+        <Row type="flex" justify="start" class="code-row-bg">
+          <Col :xs="{ span:24}" :sm="{ span: 8, push: 4 }" :md="{ span: 6, push: 5 }">
+            <lantern :array="images"></lantern>
+          </Col>
+        </Row>
+      </Scroll>
     </div>
-         <filterList class="filterList"></filterList> 
+         <filterList class="filterList"></filterList>
     <div class="content">
        <div class="blogs">
           <div class="blog" v-for="blog in blogs">
@@ -18,7 +20,7 @@
               </Col>
           </Row>
         </div>
-       </div> 
+       </div>
   </div>
   </div>
 </template>
@@ -28,7 +30,7 @@ import Lantern from "@/components/lantern";
 import Blog from "@/components/blog";
 import Top from "@/views/top";
 import FilterList from "@/components/FilterList";
-import { getAlllogs } from "./../api/api";
+import {searchBlogs} from "@/api/blog";
 
 export default {
   components: {
@@ -40,7 +42,7 @@ export default {
   data() {
     return {
       totalPageNum:null,
-      pageNum: null,
+      pageNum: 1,
       pageSize: 15,
       images: [
         {
@@ -64,94 +66,39 @@ export default {
           url: "http://www.baidu.com"
         }
       ],
-      blogs: [
-        {
-          id:1,
-          title: "学习VUE",
-          content: "我爱学习，学习爱我",
-          image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-          url: "https://cn.vuejs.org/v2/guide/routing.html",
-          time: new Date().getTime() - 60 * 3 * 1000,
-          readNumber: 123,
-          collection: 456
-        },
-        {
-          id:2,
-          title: "学习VUE",
-          content: "我爱学习，学习爱我",
-          image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-          url: "http://www.baidu.com",
-          time: new Date().getTime() - 60 * 3 * 1000,
-          readNumber: 123,
-          collection: 456
-        },
-        {
-          id:3,
-          title: "学习VUE",
-          content: "我爱学习，学习爱我",
-          image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-          url: "https://cn.vuejs.org/v2/guide/routing.html",
-          time: new Date().getTime() - 60 * 3 * 1000,
-          readNumber: 123,
-          collection: 456
-        },
-        {
-          id:4,
-          title: "学习VUE",
-          content: "我爱学习，学习爱我",
-          image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-          url: "http://www.baidu.com",
-          time: new Date().getTime() - 60 * 3 * 1000,
-          readNumber: 123,
-          collection: 456
-        },
-        {
-          id:5,
-          title: "学习VUE",
-          content: "我爱学习，学习爱我",
-          image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-          url: "https://cn.vuejs.org/v2/guide/routing.html",
-          time: new Date().getTime() - 60 * 3 * 1000,
-          readNumber: 123,
-          collection: 456
-        },
-        {
-          id:6,
-          title: "学习VUE",
-          content: "我爱学习，学习爱我",
-          image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-          url: "http://www.baidu.com",
-          time: new Date().getTime() - 60 * 3 * 1000,
-          readNumber: 123,
-          collection: 456
-        },
-        {
-          id:7,
-          title: "学习VUE",
-          content: "我爱学习，学习爱我",
-          image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-          url: "https://cn.vuejs.org/v2/guide/routing.html",
-          time: new Date().getTime() - 60 * 3 * 1000,
-          readNumber: 123,
-          collection: 456
-        },
-        {
-          id:8,
-          title: "学习VUE",
-          content: "我爱学习，学习爱我",
-          image: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-          url: "http://www.baidu.com",
-          time: new Date().getTime() - 60 * 3 * 1000,
-          readNumber: 123,
-          collection: 456
-        }
-      ]
+      blogs: [],
     };
   },
   methods: {
+    handleReachBottom () {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          const last = this.list1[this.list1.length - 1];
+          for (let i = 1; i < 11; i++) {
+            this.list1.push(last + i);
+          }
+          resolve();
+        }, 2000);
+      });
+    },
     searchBlog(data) {
       console.log(data);
-      //TODO
+      let params={
+        classify: 0,
+        pageNumber: 1,
+        pageSize: this.pageSize,
+        title:data
+      };
+      searchBlogs(params).then(res=>{
+        console.log(res);
+        if(res.data.length===0||res.data==null){
+          this.$message.info("没有找到相关内容");
+        }else{
+          this.blogs=res.data;
+        }
+      }).catch(err=>{
+        console.log(err);
+      })
     },
     getBlog(data){
       //todo
@@ -179,8 +126,19 @@ export default {
     }
   },
   created: function() {
+    let params={
+      classify: 0,
+      pageNumber: 1,
+      pageSize: this.pageSize,
+    };
     //获取博客信息
-    this.getBlogs();
+    searchBlogs(params).then(res=>{
+      console.log(res);
+      this.blogs=res.data;
+      this.pageNum++;
+    }).catch(err=>{
+      console.log(err);
+    });
   }
 };
 </script>

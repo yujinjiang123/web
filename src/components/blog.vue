@@ -2,14 +2,14 @@
   <div style="background:#eee;padding:1px;margin-bottom:2px">
     <Card :bordered="false">
       <p class="title" @click="gotoBlog(blog.id)" slot="title">{{blog.title}}</p>
-      <p>{{blog.content}}</p>
+      <!--<p>{{blog.content}}</p>-->
       <div class="info">
-        <Avatar :src="blog.image"/>
-        <Time class="text" :time="blog.time"/>
+        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg"/>
+        <Time class="text" :time="new Date(blog.createTime)"/>
         <div class="read-collection ">
-          <p class="text" style="color:#2d8cf0;">{{blog.readNumber}}
+          <p class="text" style="color:#2d8cf0;">{{blog.thumbsUpNum}}
           <p style="padding:9px 2px 0px;">阅读</p></p>
-          <p class="text" style="color:#2d8cf0;">{{blog.collection}}
+          <p class="text" style="color:#2d8cf0;">{{blog.collectNum}}
           <p style="padding:9px 2px 0px;">收藏</p></p>
         </div>
       </div>
@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-  import {goBlog} from "./../api/api";
+  import {getBlog} from "./../api/blog";
   export default {
     data() {
       return {};
@@ -29,8 +29,18 @@
       gotoBlog(id){
         console.log(id);
         //todo
+        getBlog(id).then(res=>{
+          console.log(res);
+          localStorage.essay=res.data.content;
+          console.log(localStorage.essay);
+          this.$router.push({
+            name:"article"
+          })
+        }).catch(err=>{
+          console.log(err);
+        })
       },
-    }
+    },
   };
 </script>
 

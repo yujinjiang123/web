@@ -2,6 +2,7 @@ import {login} from "@/api/user"
 
 const user={
   state:{
+    id:"",
     username:'',
     nickname:'',
     email:'',
@@ -50,7 +51,6 @@ const user={
       })
     }
   }
-
 };
 
 
